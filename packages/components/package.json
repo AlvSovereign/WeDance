@@ -1,0 +1,22 @@
+{
+  "name": "components",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-native": "*",
+    "react": "*",
+    "react-native": "*"
+  },
+  "dependencies": {
+    "@react-native-community/hooks": "^2.6.0",
+    "i18next": "^19.8.4",
+    "react-hook-form": "^6.14.2",
+    "react-i18next": "^11.8.5",
+    "react-native-svg": "^12.1.0",
+    "react-native-web": "^0.14.10"
+  }
+}

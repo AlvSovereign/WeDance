@@ -1,0 +1,31 @@
+{
+  "signin": {
+    "dividerText": "OR",
+    "title": "Sign in",
+    "form": {
+      "email": {
+        "placeholder": "Email",
+        "validation": {
+          "isRequired": "Your email address is required",
+          "isValid": "You need to submit a valid email address"
+        }
+      },
+      "facebookButton": "Continue with Facebook",
+      "googleButton": "Continue with Google",
+      "password": {
+        "placeholder": "Password",
+        "message": "Your password",
+        "validation": {
+          "isRequired": "is required",
+          "isAtLeastEightChars": "needs to be at least 8 characters",
+          "hasAtLeastOneNumber": "needs at least 1 number",
+          "hasAtLeastOneLowerCaseChar": "needs at least 1 lowercase letter",
+          "hasAtLeastOneUpperCaseChar": "needs at least 1 uppercase letter",
+          "hasAtLeastOneSpecialChar": "and needs at least 1 special character"
+        }
+      },
+      "submitButton": "Login"
+    },
+    "subtitle": "Sign in with your email or user name. Don't have an account? Don't worry, we'll make one for you so choose a memorable password."
+  }
+}

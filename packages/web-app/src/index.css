@@ -1,0 +1,45 @@
+@import-normalize;
+
+@font-face {
+  font-family: 'Geomanist-Light';
+  font-weight: 400;
+  src: url(/public/fonts/Geomanist-Light.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Geomanist';
+  font-weight: 400;
+  src: url(/public/fonts/Geomanist.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Geomanist-Book';
+  font-weight: 400;
+  src: url(/public/fonts/Geomanist-Book.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Geomanist-Medium';
+  font-weight: 400;
+  src: url(/public/fonts/Geomanist-Medium.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Geomanist-Bold';
+  font-weight: 400;
+  src: url(/public/fonts/Geomanist-Bold.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  font-weight: 400;
+  src: url(/public/fonts/Montserrat-Bold.ttf) format('opentype');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+p {
+  margin: 0;
+}
