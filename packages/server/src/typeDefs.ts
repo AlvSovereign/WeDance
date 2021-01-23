@@ -2,8 +2,11 @@ import { gql } from 'apollo-server'
 
 const typeDefs = gql`
   directive @isAuthenticated on FIELD_DEFINITION
-  directive @entity on OBJECT
-  directive @column on FIELD_DEFINITION
+  directive @entity(
+    embedded: Boolean
+    additionalFields: [AdditionalEntityFields]
+  ) on OBJECT
+  directive @column(overrideType: String) on FIELD_DEFINITION
   directive @id on FIELD_DEFINITION
 
   scalar URL
@@ -46,6 +49,11 @@ const typeDefs = gql`
   union ReleaseEntry = Track | Mix
   # union PerformedByEntry = Artist | String
   # union ProducedByEntry = Artist | String
+
+  input AdditionalEntityFields {
+    path: String
+    type: String
+  }
 
   input SigninInput {
     email: String!

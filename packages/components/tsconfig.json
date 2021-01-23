@@ -6,6 +6,12 @@
     "noEmit": true,
     "target": "ESNext"
   },
-  "include": ["**/*.ts", "**/*.tsx", "../web-app/src/declarations.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../web-app/src/declarations.d.ts",
+    "../server/src/typeDefs.ts",
+    "../server/src/resolvers.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -63,6 +63,7 @@ const resolvers: IResolvers = {
     //     return { token, ...user };
     //   },
     signin: async (_, { input }) => {
+      console.log('input: ', input)
       try {
         const { email } = input
         const foundUser: any = await models.User.findOne({ email })

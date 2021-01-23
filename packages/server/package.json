@@ -16,6 +16,7 @@
     "apollo-server": "^2.19.2",
     "apollo-server-cache-redis": "^1.2.3",
     "bcrypt": "^5.0.0",
+    "components": "^0.1.0",
     "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.7.0",

@@ -66,6 +66,11 @@ export enum SocialType {
 
 export type ReleaseEntry = Track | Mix
 
+export type AdditionalEntityFields = {
+  path?: Maybe<Scalars['String']>
+  type?: Maybe<Scalars['String']>
+}
+
 export type SigninInput = {
   email: Scalars['String']
 }
@@ -325,8 +330,9 @@ export type ResolversTypes = {
   ReleaseType: ReleaseType
   SocialType: SocialType
   ReleaseEntry: ResolversTypes['Track'] | ResolversTypes['Mix']
-  SigninInput: SigninInput
+  AdditionalEntityFields: AdditionalEntityFields
   String: ResolverTypeWrapper<Scalars['String']>
+  SigninInput: SigninInput
   Artist: ResolverTypeWrapper<Artist>
   ID: ResolverTypeWrapper<Scalars['ID']>
   Mix: ResolverTypeWrapper<Mix>
@@ -350,8 +356,9 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   URL: Scalars['URL']
   ReleaseEntry: ResolversParentTypes['Track'] | ResolversParentTypes['Mix']
-  SigninInput: SigninInput
+  AdditionalEntityFields: AdditionalEntityFields
   String: Scalars['String']
+  SigninInput: SigninInput
   Artist: Artist
   ID: Scalars['ID']
   Mix: Mix
@@ -376,6 +383,36 @@ export type IsAuthenticatedDirectiveResolver<
   Parent,
   ContextType = any,
   Args = IsAuthenticatedDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>
+
+export type EntityDirectiveArgs = {
+  embedded?: Maybe<Scalars['Boolean']>
+  additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>
+}
+
+export type EntityDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = any,
+  Args = EntityDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>
+
+export type ColumnDirectiveArgs = { overrideType?: Maybe<Scalars['String']> }
+
+export type ColumnDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = any,
+  Args = ColumnDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>
+
+export type IdDirectiveArgs = {}
+
+export type IdDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = any,
+  Args = IdDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>
 
 export interface UrlScalarConfig
@@ -692,6 +729,9 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>
 export type DirectiveResolvers<ContextType = any> = {
   isAuthenticated?: IsAuthenticatedDirectiveResolver<any, any, ContextType>
+  entity?: EntityDirectiveResolver<any, any, ContextType>
+  column?: ColumnDirectiveResolver<any, any, ContextType>
+  id?: IdDirectiveResolver<any, any, ContextType>
 }
 
 /**

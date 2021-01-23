@@ -8,8 +8,7 @@ import Document, {
   DocumentContext,
 } from 'next/document'
 import { AppRegistry } from 'react-native'
-
-import { name as appName } from '../package.json'
+import { name as appName } from '../../package.json'
 
 // Force Next-generated DOM elements to fill their parent's height
 const normalizeNextElements = `

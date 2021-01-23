@@ -1,6 +1,11 @@
 import React, { FC, ReactNode, useContext } from 'react'
-import { StyleProp, StyleSheet, Text as RNWText, TextStyle } from 'react-native'
-import { useRnwToHtml } from '../../../hooks'
+import {
+  StyleProp,
+  StyleSheet,
+  Text as RNText,
+  AccessibilityProps,
+  TextStyle,
+} from 'react-native'
 import {
   ITheme,
   MsqThemeContext,
@@ -24,9 +29,9 @@ export type TextVariant =
   | 'stats'
   | 'title'
 
-interface TextProps {
-  as?: string
-  asProps?: any
+interface TextProps extends AccessibilityProps {
+  accessibilityRole?: any
+  ariaLevel?: any
   children: ReactNode
   color?: 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
   display?: 'block' | 'inline'
@@ -37,8 +42,8 @@ interface TextProps {
 }
 
 const Text: FC<TextProps> = ({
-  as,
-  asProps,
+  accessibilityRole,
+  ariaLevel,
   children,
   color,
   display,
@@ -46,44 +51,27 @@ const Text: FC<TextProps> = ({
   style,
   textAlign,
   variant,
+  ...rest
 }) => {
   const theme: ITheme = useContext(MsqThemeContext)
   const styles: any = generateStyles(theme, variant)
-  const props = {
-    children,
-    style: clsx([
-      styles[variant],
-      color && styles[color],
-      display && styles[display],
-      gutterBottom && styles[gutterBottom],
-      textAlign && styles[textAlign],
-      style,
-    ]),
-    ...asProps,
-  }
-  const { Component } = useRnwToHtml(as, props)
 
   return (
-    <>
-      {Component ? (
-        <>{Component}</>
-      ) : (
-        <RNWText
-          // accessibilityRole={accessibilityRole[variant] || null}
-          // aria-level={ariaLevel[variant] || null}
-          style={clsx([
-            styles[variant],
-            color && styles[color],
-            display && styles[display],
-            gutterBottom && styles[gutterBottom],
-            textAlign && styles[textAlign],
-            style,
-          ])}
-        >
-          {children}
-        </RNWText>
-      )}
-    </>
+    <RNText
+      accessibilityRole={accessibilityRole}
+      aria-level={ariaLevel}
+      style={clsx([
+        styles[variant],
+        color && styles[color],
+        display && styles[display],
+        gutterBottom && styles[gutterBottom],
+        textAlign && styles[textAlign],
+        style,
+      ])}
+      {...rest}
+    >
+      {children}
+    </RNText>
   )
 }
 

@@ -62,7 +62,6 @@ const Button: FC<ButtonProps> = ({
           icon: leftIcon,
         })}
       <Text
-        as="span"
         style={[
           styles.textBase,
           variant === 'primary' && styles.primaryText,

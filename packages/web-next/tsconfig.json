@@ -8,6 +8,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/declarations.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

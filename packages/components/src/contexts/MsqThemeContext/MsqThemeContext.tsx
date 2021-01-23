@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import { useResponsive } from '../../hooks'
 import color, { TColor } from './color'
 import spacing, { TSpacing } from './spacing'
-import { heading, text, TText } from './text'
+import { heading, Text, TText } from './text'
 
 interface ThemeContextProps {
   children: ReactNode
@@ -20,7 +20,7 @@ const ThemeContext: FC<ThemeContextProps> = ({ children }) => {
   const defaultTheme = {
     ...color,
     ...spacing,
-    ...text,
+    ...Text,
     ...responsiveHeaders,
   }
 

@@ -18,16 +18,18 @@ import SignIn from './src/ui/organisms/screens/SignIn/SignIn'
 // Theming
 import color from './src/contexts/MsqThemeContext/color'
 import spacing from './src/contexts/MsqThemeContext/spacing'
-import { text as TextTheme } from './src/contexts/MsqThemeContext/text'
+import { Text as TextTheme } from './src/contexts/MsqThemeContext/text'
 import ThemeContext from './src/contexts/MsqThemeContext/MsqThemeContext'
 
 // GraphQL
-import typeDefs from './src/graphql/schema.graphql'
-
 import { GET_ME } from './src/graphql/queries'
+import { SIGNIN } from './src/graphql/mutations'
 
 // i18n
 import i18n from './src/i18n'
+
+// images
+import SigninImage from './src/assets/images/signinBack.webp'
 
 export {
   color,
@@ -41,10 +43,12 @@ export {
   Page,
   ProtectedRoute,
   SignIn,
+  SIGNIN,
   spacing,
   TextTheme,
   Text,
   ThemeContext,
-  typeDefs,
   GET_ME,
 }
+
+export { SigninImage }

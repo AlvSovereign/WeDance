@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useDimensions } from '@react-native-community/hooks'
 
 const useResponsive = () => {
@@ -15,7 +15,7 @@ const useResponsive = () => {
     windowSize = 'lg'
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setSize(windowSize)
   }, [windowSize])
 

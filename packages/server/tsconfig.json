@@ -68,6 +68,12 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "exclude": ["node_modules", "../../node_modules"],
-  "include": ["src", "index.ts", "typeDefs.ts"]
+  "include": [
+    "src",
+    "index.ts",
+    "typeDefs.ts",
+    "../components/src/graphql/resolvers.ts",
+    "../components/src/graphql/typeDefs.ts"
+  ]
   // "extends": "../../tsconfig.base.json"
 }

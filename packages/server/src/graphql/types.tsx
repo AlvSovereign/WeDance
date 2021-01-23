@@ -63,6 +63,11 @@ export enum SocialType {
 
 export type ReleaseEntry = Track | Mix
 
+export type AdditionalEntityFields = {
+  path?: Maybe<Scalars['String']>
+  type?: Maybe<Scalars['String']>
+}
+
 export type SigninInput = {
   email: Scalars['String']
 }
@@ -197,11 +202,6 @@ export type MutationSigninArgs = {
 
 export type MutationSocialSigninArgs = {
   input: SigninInput
-}
-
-export type AdditionalEntityFields = {
-  path?: Maybe<Scalars['String']>
-  type?: Maybe<Scalars['String']>
 }
 
 import { ObjectID } from 'mongodb'
@@ -351,8 +351,9 @@ export type ResolversTypes = {
   ReleaseType: ReleaseType
   SocialType: SocialType
   ReleaseEntry: ResolversTypes['Track'] | ResolversTypes['Mix']
-  SigninInput: SigninInput
+  AdditionalEntityFields: AdditionalEntityFields
   String: ResolverTypeWrapper<Scalars['String']>
+  SigninInput: SigninInput
   Artist: ResolverTypeWrapper<Artist>
   ID: ResolverTypeWrapper<Scalars['ID']>
   Mix: ResolverTypeWrapper<Mix>
@@ -370,15 +371,15 @@ export type ResolversTypes = {
   >
   Query: ResolverTypeWrapper<{}>
   Mutation: ResolverTypeWrapper<{}>
-  AdditionalEntityFields: AdditionalEntityFields
 }
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   URL: Scalars['URL']
   ReleaseEntry: ResolversParentTypes['Track'] | ResolversParentTypes['Mix']
-  SigninInput: SigninInput
+  AdditionalEntityFields: AdditionalEntityFields
   String: Scalars['String']
+  SigninInput: SigninInput
   Artist: Artist
   ID: Scalars['ID']
   Mix: Mix
@@ -394,7 +395,6 @@ export type ResolversParentTypes = {
   }
   Query: {}
   Mutation: {}
-  AdditionalEntityFields: AdditionalEntityFields
 }
 
 export type IsAuthenticatedDirectiveArgs = {}
@@ -404,30 +404,6 @@ export type IsAuthenticatedDirectiveResolver<
   Parent,
   ContextType = any,
   Args = IsAuthenticatedDirectiveArgs
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>
-
-export type UnionDirectiveArgs = {
-  discriminatorField?: Maybe<Scalars['String']>
-  additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>
-}
-
-export type UnionDirectiveResolver<
-  Result,
-  Parent,
-  ContextType = any,
-  Args = UnionDirectiveArgs
-> = DirectiveResolverFn<Result, Parent, ContextType, Args>
-
-export type AbstractEntityDirectiveArgs = {
-  discriminatorField: Scalars['String']
-  additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>
-}
-
-export type AbstractEntityDirectiveResolver<
-  Result,
-  Parent,
-  ContextType = any,
-  Args = AbstractEntityDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>
 
 export type EntityDirectiveArgs = {
@@ -458,6 +434,30 @@ export type IdDirectiveResolver<
   Parent,
   ContextType = any,
   Args = IdDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>
+
+export type UnionDirectiveArgs = {
+  discriminatorField?: Maybe<Scalars['String']>
+  additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>
+}
+
+export type UnionDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = any,
+  Args = UnionDirectiveArgs
+> = DirectiveResolverFn<Result, Parent, ContextType, Args>
+
+export type AbstractEntityDirectiveArgs = {
+  discriminatorField: Scalars['String']
+  additionalFields?: Maybe<Array<Maybe<AdditionalEntityFields>>>
+}
+
+export type AbstractEntityDirectiveResolver<
+  Result,
+  Parent,
+  ContextType = any,
+  Args = AbstractEntityDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>
 
 export type LinkDirectiveArgs = { overrideType?: Maybe<Scalars['String']> }
@@ -801,11 +801,11 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>
 export type DirectiveResolvers<ContextType = any> = {
   isAuthenticated?: IsAuthenticatedDirectiveResolver<any, any, ContextType>
-  union?: UnionDirectiveResolver<any, any, ContextType>
-  abstractEntity?: AbstractEntityDirectiveResolver<any, any, ContextType>
   entity?: EntityDirectiveResolver<any, any, ContextType>
   column?: ColumnDirectiveResolver<any, any, ContextType>
   id?: IdDirectiveResolver<any, any, ContextType>
+  union?: UnionDirectiveResolver<any, any, ContextType>
+  abstractEntity?: AbstractEntityDirectiveResolver<any, any, ContextType>
   link?: LinkDirectiveResolver<any, any, ContextType>
   embedded?: EmbeddedDirectiveResolver<any, any, ContextType>
   map?: MapDirectiveResolver<any, any, ContextType>
