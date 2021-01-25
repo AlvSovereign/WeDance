@@ -33,15 +33,9 @@ const GET_ARTIST = gql`
       countries
       biography
       url
-      # releases {
-      #   _id
-      #   title
-      #   tracks {
-      #     _id
-      #   }
-      #   coverImage
-      #   publishDate
-      # }
+      releases {
+        _id
+      }
       tag
       # socialLinks {
       #   type
@@ -61,4 +55,39 @@ const GET_ARTISTS = gql`
   }
 `
 
-export { GET_ARTIST, GET_ARTISTS, GET_ME }
+const GET_RELEASES_BY_ARTIST = gql`
+  query GetReleasesByArtist($input: ReleaseInput) {
+    releasesByArtist(input: $input) {
+      _id
+      createdAt
+      title
+      performedBy {
+        _id
+      }
+      owner {
+        _id
+      }
+      releaseType
+      tracks {
+        _id
+        credits
+        filename
+        genre
+        label
+        likes
+        plays
+        title
+        url
+      }
+      label
+      coverImage
+      producedBy {
+        _id
+      }
+      publishDate
+      credits
+    }
+  }
+`
+
+export { GET_ARTIST, GET_ARTISTS, GET_ME, GET_RELEASES_BY_ARTIST }

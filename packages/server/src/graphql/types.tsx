@@ -282,11 +282,16 @@ export type User = {
 export type Query = {
   artist?: Maybe<Artist>
   artists?: Maybe<Array<Maybe<Artist>>>
+  releasesByArtist: Release
   me?: Maybe<User>
 }
 
 export type QueryArtistArgs = {
   input?: Maybe<ArtistInput>
+}
+
+export type QueryReleasesByArtistArgs = {
+  input?: Maybe<ReleaseInput>
 }
 
 export type Mutation = {
@@ -886,6 +891,12 @@ export type QueryResolvers<
     Maybe<Array<Maybe<ResolversTypes['Artist']>>>,
     ParentType,
     ContextType
+  >
+  releasesByArtist?: Resolver<
+    ResolversTypes['Release'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryReleasesByArtistArgs, never>
   >
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>
 }

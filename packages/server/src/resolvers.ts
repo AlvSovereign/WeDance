@@ -9,18 +9,27 @@ const resolvers: IResolvers = {
   Query: {
     artist: async (parent, { input }, ctx, info) => {
       const artist = await models.Artist.findOne(input)
-      console.log('artist: ', artist)
 
       return artist
     },
     artists: async () => {
       const artists = await models.Artist.findAll()
-      console.log('artists: ', artists)
 
       return artists
     },
     me: async (_, __, { user }, ___) => {
       return user
+    },
+    releasesByArtist: async (parent, { input }, ctx, info) => {
+      const releases = await models.Release.findById(input._id, [
+        'owner',
+        'performedBy',
+        'producedBy',
+        'tracks',
+      ])
+
+      console.log('releases: ', releases)
+      return releases
     },
   },
   Mutation: {
@@ -114,6 +123,9 @@ const resolvers: IResolvers = {
     //     const me: any = await models.User.findByIdAndUpdate(input._id, rest);
     //     return me;
     //   },
+  },
+  Track: () => {
+    console.log('THING')
   },
   URL: URLResolver,
 }

@@ -269,6 +269,7 @@ const typeDefs = gql`
   type Query {
     artist(input: ArtistInput): Artist
     artists: [Artist]
+    releasesByArtist(input: ReleaseInput): Release!
     me: User
   }
 

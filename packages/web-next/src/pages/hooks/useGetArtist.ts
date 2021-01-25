@@ -6,7 +6,7 @@ import { fetcher } from '../../utils'
 const useGetArtist = (name: any, options?: UseQueryOptions) => {
   return useQuery<ArtistQuery, Error>(
     ['artist', name],
-    () => fetcher(GET_ARTIST, { input: { name } }),
+    () => fetcher(GET_ARTIST, { input: { url: name } }),
     {
       ...options,
       cacheTime: 86400000, // 24 hrs

@@ -285,11 +285,16 @@ export type User = {
 export type Query = {
   artist?: Maybe<Artist>
   artists?: Maybe<Array<Maybe<Artist>>>
+  releasesByArtist: Release
   me?: Maybe<User>
 }
 
 export type QueryArtistArgs = {
   input?: Maybe<ArtistInput>
+}
+
+export type QueryReleasesByArtistArgs = {
+  input?: Maybe<ReleaseInput>
 }
 
 export type Mutation = {
@@ -815,6 +820,12 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >
+  releasesByArtist?: Resolver<
+    ResolversTypes['Release'],
+    ParentType,
+    ContextType,
+    RequireFields<QueryReleasesByArtistArgs, never>
+  >
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>
 }
 
@@ -963,7 +974,7 @@ export type ArtistQuery = {
       | 'tag'
       | 'website'
       | 'galleryImages'
-    >
+    > & { releases?: Maybe<Array<Maybe<Pick<Release, '_id'>>>> }
   >
 }
 
@@ -971,6 +982,29 @@ export type ArtistsQueryVariables = Exact<{ [key: string]: never }>
 
 export type ArtistsQuery = {
   artists?: Maybe<Array<Maybe<Pick<Artist, 'url'>>>>
+}
+
+export type GetReleasesByArtistQueryVariables = Exact<{
+  input?: Maybe<ReleaseInput>
+}>
+
+export type GetReleasesByArtistQuery = {
+  releasesByArtist: Pick<
+    Release,
+    | '_id'
+    | 'createdAt'
+    | 'title'
+    | 'releaseType'
+    | 'label'
+    | 'coverImage'
+    | 'publishDate'
+    | 'credits'
+  > & {
+    performedBy: Array<Pick<Artist, '_id'>>
+    owner: Pick<Artist, '_id'>
+    tracks: Array<Pick<Track, '_id'>>
+    producedBy: Array<Pick<Artist, '_id'>>
+  }
 }
 
 export const SigninDocument = gql`
@@ -1129,6 +1163,9 @@ export const ArtistDocument = gql`
       countries
       biography
       url
+      releases {
+        _id
+      }
       tag
       website
       galleryImages
@@ -1230,4 +1267,79 @@ export type ArtistsLazyQueryHookResult = ReturnType<typeof useArtistsLazyQuery>
 export type ArtistsQueryResult = ApolloReactCommon.QueryResult<
   ArtistsQuery,
   ArtistsQueryVariables
+>
+export const GetReleasesByArtistDocument = gql`
+  query GetReleasesByArtist($input: ReleaseInput) {
+    releasesByArtist(input: $input) {
+      _id
+      createdAt
+      title
+      performedBy {
+        _id
+      }
+      owner {
+        _id
+      }
+      releaseType
+      tracks {
+        _id
+      }
+      label
+      coverImage
+      producedBy {
+        _id
+      }
+      publishDate
+      credits
+    }
+  }
+`
+
+/**
+ * __useGetReleasesByArtistQuery__
+ *
+ * To run a query within a React component, call `useGetReleasesByArtistQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetReleasesByArtistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetReleasesByArtistQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetReleasesByArtistQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    GetReleasesByArtistQuery,
+    GetReleasesByArtistQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useQuery<
+    GetReleasesByArtistQuery,
+    GetReleasesByArtistQueryVariables
+  >(GetReleasesByArtistDocument, baseOptions)
+}
+export function useGetReleasesByArtistLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetReleasesByArtistQuery,
+    GetReleasesByArtistQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useLazyQuery<
+    GetReleasesByArtistQuery,
+    GetReleasesByArtistQueryVariables
+  >(GetReleasesByArtistDocument, baseOptions)
+}
+export type GetReleasesByArtistQueryHookResult = ReturnType<
+  typeof useGetReleasesByArtistQuery
+>
+export type GetReleasesByArtistLazyQueryHookResult = ReturnType<
+  typeof useGetReleasesByArtistLazyQuery
+>
+export type GetReleasesByArtistQueryResult = ApolloReactCommon.QueryResult<
+  GetReleasesByArtistQuery,
+  GetReleasesByArtistQueryVariables
 >

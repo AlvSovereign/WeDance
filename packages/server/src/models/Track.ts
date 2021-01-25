@@ -1,11 +1,21 @@
-import mongoose, { Schema } from 'mongoose';
-import { nanoid } from 'nanoid';
+import mongoose, { Schema } from 'mongoose'
+import { nanoid } from 'nanoid'
 
 const TrackSchema: Schema = new Schema(
   {
     id: {
       type: String,
       default: () => nanoid(),
+    },
+    modelId: {
+      type: Schema.Types.ObjectId, // a user object id
+      required: true,
+      refPath: 'modelId.modelName',
+    },
+    modelName: {
+      type: String,
+      required: true,
+      enum: ['Release'],
     },
     title: {
       type: String,
@@ -80,12 +90,12 @@ const TrackSchema: Schema = new Schema(
       maxlength: 300,
     },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
 const Track: mongoose.Model<mongoose.Document, {}> = mongoose.model(
   'Track',
-  TrackSchema
-);
+  TrackSchema,
+)
 
-export default Track;
+export default Track

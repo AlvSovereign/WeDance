@@ -22,6 +22,11 @@ const ReleaseSchema: Schema = new Schema(
       required: true,
       maxlength: 100,
     },
+    owner: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Artist',
+      required: true,
+    },
     producedBy: [
       {
         type: mongoose.SchemaTypes.ObjectId,

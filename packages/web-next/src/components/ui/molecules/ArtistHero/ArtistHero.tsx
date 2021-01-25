@@ -62,10 +62,10 @@ const ArtistHero: FC<ArtistHeroProps> = ({
         <Text as="p" color="white" gutterBottom="xs" variant="body1">
           {tag}
         </Text>
-        <CountryFlags
+        {/* <CountryFlags
           css={{ marginBottom: theme.LINEAR_XL }}
           countries={countries}
-        />
+        /> */}
         <Box css={{ marginBottom: theme.LINEAR_XXL }} direction="row">
           <Button
             css={{ flex: 1, marginRight: theme.LINEAR_SM }}
@@ -87,9 +87,7 @@ const ArtistHero: FC<ArtistHeroProps> = ({
             variant="transparent"
           />
         </Box>
-        {releases && releases.length ? (
-          <ArtistMostPopularSongs releases={releases} t={t} />
-        ) : null}
+        <ArtistMostPopularSongs releases={releases} t={t} />
       </Box>
     </Box>
   )

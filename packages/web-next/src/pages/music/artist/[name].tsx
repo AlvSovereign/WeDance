@@ -18,18 +18,21 @@ const ArtistPage: FC<ArtistPageProps> = () => {
   const { t } = useTranslation(['artist'])
   const windowSize = useResponsive()
   const router = useRouter()
-  const { data } = useGetArtist(router.query.name)
+  const { data, isLoading } = useGetArtist(router.query.name)
+
   return (
     <Page>
-      <ArtistHero
-        data={(data as ArtistQuery).artist}
-        onFollowClick={() => {}}
-        onPlayClick={() => {}}
-        onShareClick={() => {}}
-        t={t}
-        theme={theme}
-        windowSize={windowSize}
-      />
+      {!isLoading ? (
+        <ArtistHero
+          data={(data as ArtistQuery)?.artist}
+          onFollowClick={() => {}}
+          onPlayClick={() => {}}
+          onShareClick={() => {}}
+          t={t}
+          theme={theme}
+          windowSize={windowSize}
+        />
+      ) : null}
     </Page>
   )
 }

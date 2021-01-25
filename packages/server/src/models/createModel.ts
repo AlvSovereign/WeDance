@@ -46,12 +46,11 @@ const createModel = (model: mongoose.Model<mongoose.Document, {}>) => ({
       console.error('error: ', error)
     }
   },
-  findOne: async (field: any, password?: string) => {
+  findOne: async (field: any, populate?: any) => {
     try {
       const { _id, __v, ...rest }: any = await model
         .findOne(field)
-        // .populate('owner')
-        // .populate('artist')
+        .populate(populate)
         .lean()
         .exec()
 
@@ -60,10 +59,11 @@ const createModel = (model: mongoose.Model<mongoose.Document, {}>) => ({
       console.error('error: ', error)
     }
   },
-  findById: async (id: string) => {
+  findById: async (id: string, populate?: any) => {
     try {
       const doc: any = await model
         .findById(id)
+        .populate(populate)
         // .populate({
         //   path: 'artist',
         //   model: 'Artist',
