@@ -4,7 +4,7 @@ import { TFunction } from 'react-i18next'
 import { TBreakpoint } from 'components/src/hooks/useResponsive'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { ArtistHeroImage } from 'components/src/assets'
-import { Artist } from 'components/src/graphql/types'
+import { Artist, Release } from 'components/src/graphql/types'
 import {
   ArtistMostPopularSongs,
   Box,
@@ -15,6 +15,7 @@ import {
 
 interface ArtistHeroProps {
   data: Artist
+  initialArtistReleaseData: Release[]
   onFollowClick: () => void
   onPlayClick: () => void
   onShareClick: () => void
@@ -25,6 +26,7 @@ interface ArtistHeroProps {
 
 const ArtistHero: FC<ArtistHeroProps> = ({
   data,
+  initialArtistReleaseData,
   onFollowClick,
   onPlayClick,
   onShareClick,
@@ -87,7 +89,11 @@ const ArtistHero: FC<ArtistHeroProps> = ({
             variant="transparent"
           />
         </Box>
-        <ArtistMostPopularSongs releases={releases} t={t} />
+        <ArtistMostPopularSongs
+          initialData={initialArtistReleaseData}
+          releases={releases}
+          t={t}
+        />
       </Box>
     </Box>
   )

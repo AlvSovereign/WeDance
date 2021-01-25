@@ -1,21 +1,15 @@
 import { FC } from 'react'
 import { QueryObserverResult } from 'react-query'
-import { GetReleasesByArtistQuery } from 'components/src/graphql/types'
+import { Track } from 'components/src/graphql/types'
 
 interface TrackCardProps {
-  queryData: QueryObserverResult<GetReleasesByArtistQuery, Error>
+  track: Track
 }
 
-const TrackCard: FC<TrackCardProps> = ({ queryData }) => {
-  const { data, isLoading } = queryData
+const TrackCard: FC<TrackCardProps> = ({ track }) => {
+  const { title } = track
 
-  if (isLoading || !data) {
-    return <h2>Loading....</h2>
-  }
-
-  const { releasesByArtist } = data
-
-  return <p>{releasesByArtist?.title}</p>
+  return <p>{title}</p>
 }
 
 export default TrackCard

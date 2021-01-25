@@ -28,7 +28,6 @@ const resolvers: IResolvers = {
         'tracks',
       ])
 
-      console.log('releases: ', releases)
       return releases
     },
   },
