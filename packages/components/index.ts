@@ -22,14 +22,13 @@ import { Text as TextTheme } from './src/contexts/MsqThemeContext/text'
 import ThemeContext from './src/contexts/MsqThemeContext/MsqThemeContext'
 
 // GraphQL
-import { GET_ME } from './src/graphql/queries'
+import { GET_ARTIST, GET_ARTISTS, GET_ME } from './src/graphql/queries'
 import { SIGNIN } from './src/graphql/mutations'
 
 // i18n
 import i18n from './src/i18n'
 
 // images
-import SigninImage from './src/assets/images/signinBack.webp'
 
 export {
   color,
@@ -48,7 +47,6 @@ export {
   TextTheme,
   Text,
   ThemeContext,
-  GET_ME,
 }
 
-export { SigninImage }
+export { GET_ARTIST, GET_ARTISTS, GET_ME }

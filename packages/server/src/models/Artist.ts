@@ -1,11 +1,28 @@
-import mongoose, { Schema } from 'mongoose';
-import { nanoid } from 'nanoid';
+import mongoose, { Schema } from 'mongoose'
+import { nanoid } from 'nanoid'
+import { Artist as ArtistType } from '../graphql/types'
 
 const ArtistSchema: Schema = new Schema(
   {
     id: {
       type: String,
       default: () => nanoid(),
+    },
+    modelId: {
+      type: Schema.Types.ObjectId, // a user object id
+      required: true,
+      refPath: 'modelId.modelName',
+    },
+    modelName: {
+      type: String,
+      required: true,
+      enum: ['User'],
+    },
+    url: {
+      type: String,
+      required: true,
+      unique: true,
+      maxlength: 30,
     },
     name: {
       type: String,
@@ -27,12 +44,12 @@ const ArtistSchema: Schema = new Schema(
     website: String,
     galleryImages: [String],
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-const Artist: mongoose.Model<mongoose.Document, {}> = mongoose.model(
+const Artist: mongoose.Model<ArtistType> = mongoose.model(
   'Artist',
-  ArtistSchema
-);
+  ArtistSchema,
+)
 
-export default Artist;
+export default Artist

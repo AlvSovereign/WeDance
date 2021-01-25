@@ -1,16 +1,15 @@
 import i18n from 'i18next'
 // import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next'
-import commonEN from './locales/en/common.json'
-import navEN from './locales/en/nav.json'
-import signinEN from './locales/en/signin.json'
+import { ArtistEN, CommonEN, NavEN, SigninEN } from './locales/en'
 
 // the translations
 const resources = {
   en: {
-    ...commonEN,
-    ...navEN,
-    ...signinEN,
+    ...ArtistEN,
+    ...CommonEN,
+    ...NavEN,
+    ...SigninEN,
   },
 }
 

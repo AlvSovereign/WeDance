@@ -1,30 +1,31 @@
-import BookmarkOutline from './BookmarkOutline';
-import Check from './Check';
-import ChevronRight from './ChevronRight';
-import Clear from './Clear';
-import Discovery from './Discovery';
-import FBLogo from './FBLogo';
-import GLogo from './GLogo';
-import Library from './Library';
-import MoreHorizontal from './MoreHorizontal';
-import PlayCircleOutline from './PlayCircleOutline';
-import PauseCircleOutline from './PauseCircleOutline';
-import PlaylistAdd from './PlaylistAdd';
-import PlayOutline from './PlayOutline';
-import RadioChecked from './RadioChecked';
-import RadioUnchecked from './RadioUnchecked';
-import renderIcon, { IconKey } from './renderIcon';
-import Repeat from './Repeat';
-import Search from './Search';
-import Settings from './Settings';
-import ShareFilled from './ShareFilled';
-import Shuffle from './Shuffle';
-import SkipNext from './SkipNext';
-import SkipPrevious from './SkipPrevious';
-import VolumeDown from './VolumeDown';
-import VolumeMute from './VolumeMute';
-import VolumeOff from './VolumeOff';
-import VolumeUp from './VolumeUp';
+import BookmarkOutline from './BookmarkOutline'
+import Check from './Check'
+import ChevronRight from './ChevronRight'
+import Clear from './Clear'
+import Discovery from './Discovery'
+import FBLogo from './FBLogo'
+import GLogo from './GLogo'
+import Library from './Library'
+import MoreHorizontal from './MoreHorizontal'
+import PauseCircleOutline from './PauseCircleOutline'
+import PersonAdd from './PersonAdd'
+import PlayCircleOutline from './PlayCircleOutline'
+import PlaylistAdd from './PlaylistAdd'
+import PlayOutline from './PlayOutline'
+import RadioChecked from './RadioChecked'
+import RadioUnchecked from './RadioUnchecked'
+import renderIcon, { IconKey } from './renderIcon'
+import Repeat from './Repeat'
+import Search from './Search'
+import Settings from './Settings'
+import ShareFilled from './ShareFilled'
+import Shuffle from './Shuffle'
+import SkipNext from './SkipNext'
+import SkipPrevious from './SkipPrevious'
+import VolumeDown from './VolumeDown'
+import VolumeMute from './VolumeMute'
+import VolumeOff from './VolumeOff'
+import VolumeUp from './VolumeUp'
 
 export {
   BookmarkOutline,
@@ -36,10 +37,11 @@ export {
   GLogo,
   Library,
   MoreHorizontal,
+  PauseCircleOutline,
+  PersonAdd,
   PlayCircleOutline,
   PlaylistAdd,
   PlayOutline,
-  PauseCircleOutline,
   RadioChecked,
   RadioUnchecked,
   Repeat,
@@ -54,9 +56,9 @@ export {
   VolumeMute,
   VolumeOff,
   VolumeUp,
-};
-export type { IconKey };
+}
+export type { IconKey }
 
 export interface IIcon extends React.SVGProps<SVGSVGElement> {
-  style?: any;
+  style?: any
 }

@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { useTranslation } from 'react-i18next'
-import { Text } from '../..'
-import { routes } from '../../../utils'
+import { Text } from '../../..'
+import { routes } from '../../../../utils'
 import { useResponsive } from 'components/src/hooks'
 
 interface NavigationProps {

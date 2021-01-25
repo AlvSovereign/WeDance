@@ -7,7 +7,7 @@ interface MusicHomeProps {}
 const MusicHome: FC<MusicHomeProps> = ({}) => {
   const { t } = useTranslation(['music'])
 
-  return <Page css={{}}>jhdbfkuh</Page>
+  return <Page>div</Page>
 }
 
 export default MusicHome

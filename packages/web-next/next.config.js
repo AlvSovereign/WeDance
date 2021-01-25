@@ -6,6 +6,7 @@ const withTM = require('next-transpile-modules')(
     '@emotion/styled',
     '@react-native-community/hooks',
     'react-native-svg',
+    'react-native-svg-flagkit',
   ],
   {
     resolveSymlinks: true,

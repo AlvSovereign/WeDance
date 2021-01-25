@@ -17,7 +17,7 @@ import {
 } from '../../components'
 import { routes } from '../../utils'
 
-const SignIn: FC = () => {
+const SignInPage: FC = () => {
   const { data: getMeData, loading: getMeIsLoading } = useGetMe({
     onSuccess: (getMeData: any) => {
       if (getMeData.me) {
@@ -135,4 +135,4 @@ const SignIn: FC = () => {
   )
 }
 
-export default SignIn
+export default SignInPage

@@ -55,8 +55,99 @@ const typeDefs = gql`
     type: String
   }
 
+  input ArtistInput {
+    _id: ID # the user _id
+    url: String!
+    createdAt: String
+    name: String
+    avatar: String
+    releases: [ReleaseInput]
+    fans: [UserInput!]
+    countries: [String!]
+    biography: String
+    tag: String
+    socialLinks: [SocialLinksInput!]
+    website: String
+    galleryImages: [String!]
+  }
+
+  input PlaylistInput {
+    createdAt: String
+    isPrivate: Boolean
+    tracks: [TrackInput!]
+    playlistImage: String
+    createdBy: UserInput
+    followers: [UserInput!]
+    genre: DanceGenre
+    title: String
+    description: String
+  }
+
+  input ReleaseInput {
+    _id: ID #The artist _id
+    createdAt: String
+    title: String
+    performedBy: [ArtistInput!]
+    owner: ArtistInput
+    releaseType: ReleaseType
+    tracks: [TrackInput!]
+    label: [String!]
+    coverImage: String
+    producedBy: [ArtistInput!]
+    publishDate: String
+    credits: String
+  }
+
+  input SettingsInput {
+    emailNotifications: Boolean
+    pushNotifications: Boolean
+  }
+
+  input SocialLinksInput {
+    type: SocialType
+    url: String
+  }
+
   input SigninInput {
     email: String!
+  }
+
+  input TrackInput {
+    createdAt: String
+    title: String
+    performedBy: [String!]
+    producedBy: [String!]
+    coverImage: String
+    filename: String
+    likes: Int
+    duration: Int
+    label: String
+    plays: Int
+    genre: [DanceGenre]
+    credits: String
+    url: URL
+  }
+
+  input UserInput {
+    _id: ID
+    email: String
+    name: String
+    createdAt: String
+    isVerified: Boolean
+    isRegistered: Boolean
+    accountType: AccountType
+    role: Role
+    avatar: String
+    alias: String
+    artist: ArtistInput
+    token: String
+    playlists: [PlaylistInput!]
+    releasesSaved: [ReleaseInput!]
+    following: [ArtistInput!]
+    friends: [UserInput!]
+    likedSongs: [ReleaseInput!]
+    countries: [String!]
+    settings: SettingsInput
   }
 
   type Artist {
@@ -66,7 +157,8 @@ const typeDefs = gql`
     name: String!
     avatar: String
     releases: [Release]
-    owner: User!
+    modelId: ID!
+    url: String!
     fans: [User!]
     countries: [String!]
     biography: String
@@ -175,10 +267,13 @@ const typeDefs = gql`
   }
 
   type Query {
+    artist(input: ArtistInput): Artist
+    artists: [Artist]
     me: User
   }
 
   type Mutation {
+    me(input: UserInput): User!
     signin(input: SigninInput!): User!
     socialSignin(input: SigninInput!): User!
   }

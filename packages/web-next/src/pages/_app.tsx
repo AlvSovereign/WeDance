@@ -2,10 +2,12 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Hydrate } from 'react-query/hydration'
 import { persistWithLocalStorage } from 'react-query/persist-localstorage-experimental'
+import { useRouter } from 'next/router'
 import { ThemeProvider } from '@emotion/react'
 import { useAppTheme } from 'components/src/hooks'
 import { Navigation } from '../components'
 import GlobalStyles from '../styles/GlobalStyles'
+import { routes } from '../utils'
 import './index.css'
 
 const queryClient = new QueryClient({
@@ -19,6 +21,7 @@ const queryClient = new QueryClient({
 persistWithLocalStorage(queryClient)
 
 function App({ Component, pageProps }) {
+  const router = useRouter()
   const theme = useAppTheme()
 
   return (
@@ -27,7 +30,7 @@ function App({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <main css={{ display: 'flex', flexDirection: 'row' }}>
-            <Navigation />
+            {router.pathname === routes.SIGNIN ? null : <Navigation />}
             <Component {...pageProps} />
           </main>
         </ThemeProvider>

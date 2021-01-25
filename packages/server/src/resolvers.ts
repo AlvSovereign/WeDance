@@ -7,20 +7,32 @@ import { Resolvers } from './graphql/types'
 
 const resolvers: IResolvers = {
   Query: {
+    artist: async (parent, { input }, ctx, info) => {
+      const artist = await models.Artist.findOne(input)
+      console.log('artist: ', artist)
+
+      return artist
+    },
+    artists: async () => {
+      const artists = await models.Artist.findAll()
+      console.log('artists: ', artists)
+
+      return artists
+    },
     me: async (_, __, { user }, ___) => {
       return user
     },
   },
   Mutation: {
-    //   artist: async (parent, args, ctx, info) => {
-    //     const { input } = args;
-    //     const { user } = ctx;
-    //     const artist = await models.Artist.createOne({
-    //       ...input,
-    //       owner: user._id,
-    //     });
-    //     return artist;
-    //   },
+    // artist: async (parent, args, ctx, info) => {
+    //   const { input } = args
+    //   const { user } = ctx
+    //   const artist = await models.Artist.createOne({
+    //     ...input,
+    //     owner: user._id,
+    //   })
+    //   return artist
+    // },
     //   updateArtist: async (parent, args, ctx, info) => {
     //     const { input } = args;
     //     const { user } = ctx;
@@ -45,25 +57,29 @@ const resolvers: IResolvers = {
     //     });
     //     return release;
     //   },
-    //   me: async (parent, args, ctx, info) => {
-    //     const { input } = args;
-    //     const { picture, ...rest } = input;
-    //     const existing = await models.User.findOne({
-    //       email: input.email,
-    //     });
-    //     if (existing) {
-    //       throw new AuthenticationError('Invalid credentials, please try again');
-    //     }
-    //     const user = await models.User.createOne({
-    //       avatar: picture,
-    //       isRegistered: true,
-    //       ...rest,
-    //     });
-    //     const token = createToken(user);
-    //     return { token, ...user };
-    //   },
+    me: async (parent, args, ctx, info) => {
+      const { input, ...rest } = args
+      const callback = (err, doc) => {
+        if (err) {
+          console.err(err)
+          throw new Error(err)
+        }
+        console.log('doc: ', doc)
+      }
+      const updatedUser = await models.User.findByIdAndUpdate(
+        input._id,
+        rest,
+        callback,
+      )
+
+      if (updatedUser) {
+        throw new AuthenticationError('Invalid credentials, please try again')
+      }
+      const token = createToken(updatedUser)
+      // return {...updatedArtist, token};
+      return null
+    },
     signin: async (_, { input }) => {
-      console.log('input: ', input)
       try {
         const { email } = input
         const foundUser: any = await models.User.findOne({ email })

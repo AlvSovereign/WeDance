@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ITheme } from 'components/src/contexts/MsqThemeContext/MsqThemeContext'
 import { IconKey, renderIcon } from 'components/src/assets/icons'
-import { Text } from '../..'
+import { Text } from '../../..'
 
 export type Variant =
   | 'facebook'
@@ -19,7 +19,7 @@ interface ButtonProps {
   onClick: () => void
   rightIcon?: IconKey
   forwardStyles?: StyleProp<any>
-  text: string
+  text?: string
   variant: Variant
 }
 
@@ -100,19 +100,21 @@ const Button: FC<ButtonProps> = ({
           fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],
           icon: leftIcon,
         })}
-      <Text
-        as="span"
-        // style={[
-        //   styles.textBase,
-        //   variant === 'primary' && styles.primaryText,
-        //   variant === 'secondary' && styles.secondaryText,
-        //   variant === 'facebook' && styles.facebookText,
-        //   isDisabled && styles.disabledText,
-        // ]}
-        variant="button"
-      >
-        {text.toUpperCase()}
-      </Text>
+      {text && (
+        <Text
+          as="span"
+          // style={[
+          //   styles.textBase,
+          //   variant === 'primary' && styles.primaryText,
+          //   variant === 'secondary' && styles.secondaryText,
+          //   variant === 'facebook' && styles.facebookText,
+          //   isDisabled && styles.disabledText,
+          // ]}
+          variant="button"
+        >
+          {text.toUpperCase()}
+        </Text>
+      )}
       {rightIcon &&
         renderIcon({
           fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],
@@ -123,7 +125,19 @@ const Button: FC<ButtonProps> = ({
 }
 
 const StyledButton = styled((props: any) => <Button {...props} />)`
-  ${({ theme, variant }: { theme: ITheme; variant: Variant }) => {
+  ${({
+    leftIcon,
+    rightIcon,
+    text,
+    theme,
+    variant,
+  }: {
+    leftIcon: boolean
+    rightIcon: boolean
+    text: string
+    theme: ITheme
+    variant: Variant
+  }) => {
     const { BLACK, BLUE_500, BLUE_FB, LINEAR_MD, LINEAR_SM, WHITE } = theme
     return {
       ...partialStyles({ BLACK, BLUE_500, BLUE_FB, WHITE }, variant),
@@ -146,7 +160,8 @@ const StyledButton = styled((props: any) => <Button {...props} />)`
         filter: 'brightness(85%)',
       },
       svg: {
-        marginRight: LINEAR_SM,
+        marginLeft: text && rightIcon ? LINEAR_SM : 0,
+        marginRight: text && leftIcon ? LINEAR_SM : 0,
       },
     }
   }}

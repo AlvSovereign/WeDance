@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { FC } from 'react'
-import { Box, Text } from '../..'
+import { Box, Text } from '../../..'
 
 interface DividerWithTextProps {
   className: string

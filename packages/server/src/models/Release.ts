@@ -1,11 +1,21 @@
-import mongoose, { Schema } from 'mongoose';
-import { nanoid } from 'nanoid';
+import mongoose, { Schema } from 'mongoose'
+import { nanoid } from 'nanoid'
 
 const ReleaseSchema: Schema = new Schema(
   {
     id: {
       type: String,
       default: () => nanoid(),
+    },
+    modelId: {
+      type: Schema.Types.ObjectId, // an artist objectId
+      required: true,
+      refPath: 'modelId.modelName',
+    },
+    modelName: {
+      type: String,
+      required: true,
+      enum: ['Artist'],
     },
     title: {
       type: String,
@@ -55,12 +65,12 @@ const ReleaseSchema: Schema = new Schema(
       maxlength: 1000,
     },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
 const Release: mongoose.Model<mongoose.Document, {}> = mongoose.model(
   'Release',
-  ReleaseSchema
-);
+  ReleaseSchema,
+)
 
-export default Release;
+export default Release

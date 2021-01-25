@@ -24,6 +24,7 @@ const graphQLClient = new GraphQLClient(
 
 const fetcher = async (docNode: DocumentNode, variables?: Variables) => {
   const data = await graphQLClient.request(docNode, variables)
+  console.log('data: ', data)
 
   return data
 }

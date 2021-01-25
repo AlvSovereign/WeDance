@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
-interface ExploreProps {}
+interface ExporePageProps {}
 
-const Explore: FC<ExploreProps> = ({}) => {
-  return 'Explore'
+const ExporePage: FC<ExporePageProps> = ({}) => {
+  return 'ExporePage'
 }
 
-export default Explore
+export default ExporePage

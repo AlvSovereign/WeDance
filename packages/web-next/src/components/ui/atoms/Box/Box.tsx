@@ -9,6 +9,7 @@ interface BoxProps {
   direction: 'column' | 'row'
   flex: number
   justify: 'flex-start' | 'flex-end' | 'center'
+  position: 'absolute' | 'fixed' | 'relative'
 }
 
 const Box: FC<BoxProps> = ({ as, children, className }) => {
@@ -17,12 +18,13 @@ const Box: FC<BoxProps> = ({ as, children, className }) => {
 }
 
 const StyledBox = styled((props: any) => <Box {...props} />)`
-  ${({ align, direction, flex, justify }: BoxProps) => ({
+  ${({ align, direction, flex, justify, position }: BoxProps) => ({
     alignItems: align,
     display: 'flex',
     flex,
     flexDirection: direction,
     justifyContent: justify,
+    position,
   })}
 `
 

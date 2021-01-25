@@ -71,8 +71,99 @@ export type AdditionalEntityFields = {
   type?: Maybe<Scalars['String']>
 }
 
+export type ArtistInput = {
+  _id?: Maybe<Scalars['ID']>
+  url: Scalars['String']
+  createdAt?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  avatar?: Maybe<Scalars['String']>
+  releases?: Maybe<Array<Maybe<ReleaseInput>>>
+  fans?: Maybe<Array<UserInput>>
+  countries?: Maybe<Array<Scalars['String']>>
+  biography?: Maybe<Scalars['String']>
+  tag?: Maybe<Scalars['String']>
+  socialLinks?: Maybe<Array<SocialLinksInput>>
+  website?: Maybe<Scalars['String']>
+  galleryImages?: Maybe<Array<Scalars['String']>>
+}
+
+export type PlaylistInput = {
+  createdAt?: Maybe<Scalars['String']>
+  isPrivate?: Maybe<Scalars['Boolean']>
+  tracks?: Maybe<Array<TrackInput>>
+  playlistImage?: Maybe<Scalars['String']>
+  createdBy?: Maybe<UserInput>
+  followers?: Maybe<Array<UserInput>>
+  genre?: Maybe<DanceGenre>
+  title?: Maybe<Scalars['String']>
+  description?: Maybe<Scalars['String']>
+}
+
+export type ReleaseInput = {
+  _id?: Maybe<Scalars['ID']>
+  createdAt?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  performedBy?: Maybe<Array<ArtistInput>>
+  owner?: Maybe<ArtistInput>
+  releaseType?: Maybe<ReleaseType>
+  tracks?: Maybe<Array<TrackInput>>
+  label?: Maybe<Array<Scalars['String']>>
+  coverImage?: Maybe<Scalars['String']>
+  producedBy?: Maybe<Array<ArtistInput>>
+  publishDate?: Maybe<Scalars['String']>
+  credits?: Maybe<Scalars['String']>
+}
+
+export type SettingsInput = {
+  emailNotifications?: Maybe<Scalars['Boolean']>
+  pushNotifications?: Maybe<Scalars['Boolean']>
+}
+
+export type SocialLinksInput = {
+  type?: Maybe<SocialType>
+  url?: Maybe<Scalars['String']>
+}
+
 export type SigninInput = {
   email: Scalars['String']
+}
+
+export type TrackInput = {
+  createdAt?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  performedBy?: Maybe<Array<Scalars['String']>>
+  producedBy?: Maybe<Array<Scalars['String']>>
+  coverImage?: Maybe<Scalars['String']>
+  filename?: Maybe<Scalars['String']>
+  likes?: Maybe<Scalars['Int']>
+  duration?: Maybe<Scalars['Int']>
+  label?: Maybe<Scalars['String']>
+  plays?: Maybe<Scalars['Int']>
+  genre?: Maybe<Array<Maybe<DanceGenre>>>
+  credits?: Maybe<Scalars['String']>
+  url?: Maybe<Scalars['URL']>
+}
+
+export type UserInput = {
+  _id?: Maybe<Scalars['ID']>
+  email?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['String']>
+  isVerified?: Maybe<Scalars['Boolean']>
+  isRegistered?: Maybe<Scalars['Boolean']>
+  accountType?: Maybe<AccountType>
+  role?: Maybe<Role>
+  avatar?: Maybe<Scalars['String']>
+  alias?: Maybe<Scalars['String']>
+  artist?: Maybe<ArtistInput>
+  token?: Maybe<Scalars['String']>
+  playlists?: Maybe<Array<PlaylistInput>>
+  releasesSaved?: Maybe<Array<ReleaseInput>>
+  following?: Maybe<Array<ArtistInput>>
+  friends?: Maybe<Array<UserInput>>
+  likedSongs?: Maybe<Array<ReleaseInput>>
+  countries?: Maybe<Array<Scalars['String']>>
+  settings?: Maybe<SettingsInput>
 }
 
 export type Artist = {
@@ -82,7 +173,8 @@ export type Artist = {
   name: Scalars['String']
   avatar?: Maybe<Scalars['String']>
   releases?: Maybe<Array<Maybe<Release>>>
-  owner: User
+  modelId: Scalars['ID']
+  url: Scalars['String']
   fans?: Maybe<Array<User>>
   countries?: Maybe<Array<Scalars['String']>>
   biography?: Maybe<Scalars['String']>
@@ -191,12 +283,23 @@ export type User = {
 }
 
 export type Query = {
+  artist?: Maybe<Artist>
+  artists?: Maybe<Array<Maybe<Artist>>>
   me?: Maybe<User>
 }
 
+export type QueryArtistArgs = {
+  input?: Maybe<ArtistInput>
+}
+
 export type Mutation = {
+  me: User
   signin: User
   socialSignin: User
+}
+
+export type MutationMeArgs = {
+  input?: Maybe<UserInput>
 }
 
 export type MutationSigninArgs = {
@@ -332,13 +435,20 @@ export type ResolversTypes = {
   ReleaseEntry: ResolversTypes['Track'] | ResolversTypes['Mix']
   AdditionalEntityFields: AdditionalEntityFields
   String: ResolverTypeWrapper<Scalars['String']>
-  SigninInput: SigninInput
-  Artist: ResolverTypeWrapper<Artist>
+  ArtistInput: ArtistInput
   ID: ResolverTypeWrapper<Scalars['ID']>
-  Mix: ResolverTypeWrapper<Mix>
-  Int: ResolverTypeWrapper<Scalars['Int']>
-  Playlist: ResolverTypeWrapper<Playlist>
+  PlaylistInput: PlaylistInput
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
+  ReleaseInput: ReleaseInput
+  SettingsInput: SettingsInput
+  SocialLinksInput: SocialLinksInput
+  SigninInput: SigninInput
+  TrackInput: TrackInput
+  Int: ResolverTypeWrapper<Scalars['Int']>
+  UserInput: UserInput
+  Artist: ResolverTypeWrapper<Artist>
+  Mix: ResolverTypeWrapper<Mix>
+  Playlist: ResolverTypeWrapper<Playlist>
   Release: ResolverTypeWrapper<Release>
   Settings: ResolverTypeWrapper<Settings>
   SocialLinks: ResolverTypeWrapper<SocialLinks>
@@ -358,13 +468,20 @@ export type ResolversParentTypes = {
   ReleaseEntry: ResolversParentTypes['Track'] | ResolversParentTypes['Mix']
   AdditionalEntityFields: AdditionalEntityFields
   String: Scalars['String']
-  SigninInput: SigninInput
-  Artist: Artist
+  ArtistInput: ArtistInput
   ID: Scalars['ID']
-  Mix: Mix
-  Int: Scalars['Int']
-  Playlist: Playlist
+  PlaylistInput: PlaylistInput
   Boolean: Scalars['Boolean']
+  ReleaseInput: ReleaseInput
+  SettingsInput: SettingsInput
+  SocialLinksInput: SocialLinksInput
+  SigninInput: SigninInput
+  TrackInput: TrackInput
+  Int: Scalars['Int']
+  UserInput: UserInput
+  Artist: Artist
+  Mix: Mix
+  Playlist: Playlist
   Release: Release
   Settings: Settings
   SocialLinks: SocialLinks
@@ -441,7 +558,8 @@ export type ArtistResolvers<
     ParentType,
     ContextType
   >
-  owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>
+  modelId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   fans?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>
   countries?: Resolver<
     Maybe<Array<ResolversTypes['String']>>,
@@ -686,6 +804,17 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
+  artist?: Resolver<
+    Maybe<ResolversTypes['Artist']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryArtistArgs, never>
+  >
+  artists?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Artist']>>>,
+    ParentType,
+    ContextType
+  >
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>
 }
 
@@ -693,6 +822,12 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = {
+  me?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationMeArgs, never>
+  >
   signin?: Resolver<
     ResolversTypes['User'],
     ParentType,
@@ -759,7 +894,33 @@ export type SigninMutation = {
     | 'name'
     | 'role'
     | 'token'
-  >
+  > & {
+    artist?: Maybe<
+      Pick<
+        Artist,
+        | '_id'
+        | 'id'
+        | 'name'
+        | 'createdAt'
+        | 'countries'
+        | 'biography'
+        | 'tag'
+        | 'website'
+        | 'galleryImages'
+      > & {
+        releases?: Maybe<
+          Array<
+            Maybe<
+              Pick<Release, '_id' | 'title' | 'coverImage' | 'publishDate'> & {
+                tracks: Array<Pick<Track, '_id'>>
+              }
+            >
+          >
+        >
+        socialLinks?: Maybe<Array<Pick<SocialLinks, 'type' | 'url'>>>
+      }
+    >
+  }
 }
 
 export type GetMeQueryVariables = Exact<{ [key: string]: never }>
@@ -780,35 +941,36 @@ export type GetMeQuery = {
       | 'avatar'
       | 'alias'
       | 'token'
-    > & {
-      artist?: Maybe<
-        Pick<
-          Artist,
-          | '_id'
-          | 'id'
-          | 'name'
-          | 'createdAt'
-          | 'countries'
-          | 'biography'
-          | 'tag'
-          | 'website'
-          | 'galleryImages'
-        > & {
-          releases?: Maybe<
-            Array<
-              Maybe<
-                Pick<
-                  Release,
-                  '_id' | 'title' | 'coverImage' | 'publishDate'
-                > & { tracks: Array<Pick<Track, '_id'>> }
-              >
-            >
-          >
-          socialLinks?: Maybe<Array<Pick<SocialLinks, 'type' | 'url'>>>
-        }
-      >
-    }
+    > & { artist?: Maybe<Pick<Artist, '_id'>> }
   >
+}
+
+export type ArtistQueryVariables = Exact<{
+  input?: Maybe<ArtistInput>
+}>
+
+export type ArtistQuery = {
+  artist?: Maybe<
+    Pick<
+      Artist,
+      | '_id'
+      | 'id'
+      | 'name'
+      | 'countries'
+      | 'createdAt'
+      | 'biography'
+      | 'url'
+      | 'tag'
+      | 'website'
+      | 'galleryImages'
+    >
+  >
+}
+
+export type ArtistsQueryVariables = Exact<{ [key: string]: never }>
+
+export type ArtistsQuery = {
+  artists?: Maybe<Array<Maybe<Pick<Artist, 'url'>>>>
 }
 
 export const SigninDocument = gql`
@@ -825,6 +987,30 @@ export const SigninDocument = gql`
       name
       role
       token
+      artist {
+        _id
+        id
+        name
+        createdAt
+        countries
+        biography
+        releases {
+          _id
+          title
+          tracks {
+            _id
+          }
+          coverImage
+          publishDate
+        }
+        tag
+        socialLinks {
+          type
+          url
+        }
+        website
+        galleryImages
+      }
     }
   }
 `
@@ -884,27 +1070,6 @@ export const GetMeDocument = gql`
       token
       artist {
         _id
-        id
-        name
-        createdAt
-        countries
-        biography
-        releases {
-          _id
-          title
-          tracks {
-            _id
-          }
-          coverImage
-          publishDate
-        }
-        tag
-        socialLinks {
-          type
-          url
-        }
-        website
-        galleryImages
       }
     }
   }
@@ -952,4 +1117,117 @@ export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>
 export type GetMeQueryResult = ApolloReactCommon.QueryResult<
   GetMeQuery,
   GetMeQueryVariables
+>
+export const ArtistDocument = gql`
+  query Artist($input: ArtistInput) {
+    artist(input: $input) {
+      _id
+      id
+      name
+      countries
+      createdAt
+      countries
+      biography
+      url
+      tag
+      website
+      galleryImages
+    }
+  }
+`
+
+/**
+ * __useArtistQuery__
+ *
+ * To run a query within a React component, call `useArtistQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArtistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArtistQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useArtistQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ArtistQuery,
+    ArtistQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useQuery<ArtistQuery, ArtistQueryVariables>(
+    ArtistDocument,
+    baseOptions,
+  )
+}
+export function useArtistLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ArtistQuery,
+    ArtistQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useLazyQuery<ArtistQuery, ArtistQueryVariables>(
+    ArtistDocument,
+    baseOptions,
+  )
+}
+export type ArtistQueryHookResult = ReturnType<typeof useArtistQuery>
+export type ArtistLazyQueryHookResult = ReturnType<typeof useArtistLazyQuery>
+export type ArtistQueryResult = ApolloReactCommon.QueryResult<
+  ArtistQuery,
+  ArtistQueryVariables
+>
+export const ArtistsDocument = gql`
+  query Artists {
+    artists {
+      url
+    }
+  }
+`
+
+/**
+ * __useArtistsQuery__
+ *
+ * To run a query within a React component, call `useArtistsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArtistsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArtistsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useArtistsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ArtistsQuery,
+    ArtistsQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useQuery<ArtistsQuery, ArtistsQueryVariables>(
+    ArtistsDocument,
+    baseOptions,
+  )
+}
+export function useArtistsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ArtistsQuery,
+    ArtistsQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useLazyQuery<ArtistsQuery, ArtistsQueryVariables>(
+    ArtistsDocument,
+    baseOptions,
+  )
+}
+export type ArtistsQueryHookResult = ReturnType<typeof useArtistsQuery>
+export type ArtistsLazyQueryHookResult = ReturnType<typeof useArtistsLazyQuery>
+export type ArtistsQueryResult = ApolloReactCommon.QueryResult<
+  ArtistsQuery,
+  ArtistsQueryVariables
 >

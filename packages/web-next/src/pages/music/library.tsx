@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
-interface LibraryProps {}
+interface LibraryPageProps {}
 
-const Library: FC<LibraryProps> = ({}) => {
-  return 'Library'
+const LibraryPage: FC<LibraryPageProps> = ({}) => {
+  return 'LibraryPage'
 }
 
-export default Library
+export default LibraryPage

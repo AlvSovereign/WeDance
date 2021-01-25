@@ -68,8 +68,99 @@ export type AdditionalEntityFields = {
   type?: Maybe<Scalars['String']>
 }
 
+export type ArtistInput = {
+  _id?: Maybe<Scalars['ID']>
+  url: Scalars['String']
+  createdAt?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  avatar?: Maybe<Scalars['String']>
+  releases?: Maybe<Array<Maybe<ReleaseInput>>>
+  fans?: Maybe<Array<UserInput>>
+  countries?: Maybe<Array<Scalars['String']>>
+  biography?: Maybe<Scalars['String']>
+  tag?: Maybe<Scalars['String']>
+  socialLinks?: Maybe<Array<SocialLinksInput>>
+  website?: Maybe<Scalars['String']>
+  galleryImages?: Maybe<Array<Scalars['String']>>
+}
+
+export type PlaylistInput = {
+  createdAt?: Maybe<Scalars['String']>
+  isPrivate?: Maybe<Scalars['Boolean']>
+  tracks?: Maybe<Array<TrackInput>>
+  playlistImage?: Maybe<Scalars['String']>
+  createdBy?: Maybe<UserInput>
+  followers?: Maybe<Array<UserInput>>
+  genre?: Maybe<DanceGenre>
+  title?: Maybe<Scalars['String']>
+  description?: Maybe<Scalars['String']>
+}
+
+export type ReleaseInput = {
+  _id?: Maybe<Scalars['ID']>
+  createdAt?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  performedBy?: Maybe<Array<ArtistInput>>
+  owner?: Maybe<ArtistInput>
+  releaseType?: Maybe<ReleaseType>
+  tracks?: Maybe<Array<TrackInput>>
+  label?: Maybe<Array<Scalars['String']>>
+  coverImage?: Maybe<Scalars['String']>
+  producedBy?: Maybe<Array<ArtistInput>>
+  publishDate?: Maybe<Scalars['String']>
+  credits?: Maybe<Scalars['String']>
+}
+
+export type SettingsInput = {
+  emailNotifications?: Maybe<Scalars['Boolean']>
+  pushNotifications?: Maybe<Scalars['Boolean']>
+}
+
+export type SocialLinksInput = {
+  type?: Maybe<SocialType>
+  url?: Maybe<Scalars['String']>
+}
+
 export type SigninInput = {
   email: Scalars['String']
+}
+
+export type TrackInput = {
+  createdAt?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  performedBy?: Maybe<Array<Scalars['String']>>
+  producedBy?: Maybe<Array<Scalars['String']>>
+  coverImage?: Maybe<Scalars['String']>
+  filename?: Maybe<Scalars['String']>
+  likes?: Maybe<Scalars['Int']>
+  duration?: Maybe<Scalars['Int']>
+  label?: Maybe<Scalars['String']>
+  plays?: Maybe<Scalars['Int']>
+  genre?: Maybe<Array<Maybe<DanceGenre>>>
+  credits?: Maybe<Scalars['String']>
+  url?: Maybe<Scalars['URL']>
+}
+
+export type UserInput = {
+  _id?: Maybe<Scalars['ID']>
+  email?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['String']>
+  isVerified?: Maybe<Scalars['Boolean']>
+  isRegistered?: Maybe<Scalars['Boolean']>
+  accountType?: Maybe<AccountType>
+  role?: Maybe<Role>
+  avatar?: Maybe<Scalars['String']>
+  alias?: Maybe<Scalars['String']>
+  artist?: Maybe<ArtistInput>
+  token?: Maybe<Scalars['String']>
+  playlists?: Maybe<Array<PlaylistInput>>
+  releasesSaved?: Maybe<Array<ReleaseInput>>
+  following?: Maybe<Array<ArtistInput>>
+  friends?: Maybe<Array<UserInput>>
+  likedSongs?: Maybe<Array<ReleaseInput>>
+  countries?: Maybe<Array<Scalars['String']>>
+  settings?: Maybe<SettingsInput>
 }
 
 export type Artist = {
@@ -79,7 +170,8 @@ export type Artist = {
   name: Scalars['String']
   avatar?: Maybe<Scalars['String']>
   releases?: Maybe<Array<Maybe<Release>>>
-  owner: User
+  modelId: Scalars['ID']
+  url: Scalars['String']
   fans?: Maybe<Array<User>>
   countries?: Maybe<Array<Scalars['String']>>
   biography?: Maybe<Scalars['String']>
@@ -188,12 +280,23 @@ export type User = {
 }
 
 export type Query = {
+  artist?: Maybe<Artist>
+  artists?: Maybe<Array<Maybe<Artist>>>
   me?: Maybe<User>
 }
 
+export type QueryArtistArgs = {
+  input?: Maybe<ArtistInput>
+}
+
 export type Mutation = {
+  me: User
   signin: User
   socialSignin: User
+}
+
+export type MutationMeArgs = {
+  input?: Maybe<UserInput>
 }
 
 export type MutationSigninArgs = {
@@ -353,13 +456,20 @@ export type ResolversTypes = {
   ReleaseEntry: ResolversTypes['Track'] | ResolversTypes['Mix']
   AdditionalEntityFields: AdditionalEntityFields
   String: ResolverTypeWrapper<Scalars['String']>
-  SigninInput: SigninInput
-  Artist: ResolverTypeWrapper<Artist>
+  ArtistInput: ArtistInput
   ID: ResolverTypeWrapper<Scalars['ID']>
-  Mix: ResolverTypeWrapper<Mix>
-  Int: ResolverTypeWrapper<Scalars['Int']>
-  Playlist: ResolverTypeWrapper<Playlist>
+  PlaylistInput: PlaylistInput
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
+  ReleaseInput: ReleaseInput
+  SettingsInput: SettingsInput
+  SocialLinksInput: SocialLinksInput
+  SigninInput: SigninInput
+  TrackInput: TrackInput
+  Int: ResolverTypeWrapper<Scalars['Int']>
+  UserInput: UserInput
+  Artist: ResolverTypeWrapper<Artist>
+  Mix: ResolverTypeWrapper<Mix>
+  Playlist: ResolverTypeWrapper<Playlist>
   Release: ResolverTypeWrapper<Release>
   Settings: ResolverTypeWrapper<Settings>
   SocialLinks: ResolverTypeWrapper<SocialLinks>
@@ -379,13 +489,20 @@ export type ResolversParentTypes = {
   ReleaseEntry: ResolversParentTypes['Track'] | ResolversParentTypes['Mix']
   AdditionalEntityFields: AdditionalEntityFields
   String: Scalars['String']
-  SigninInput: SigninInput
-  Artist: Artist
+  ArtistInput: ArtistInput
   ID: Scalars['ID']
-  Mix: Mix
-  Int: Scalars['Int']
-  Playlist: Playlist
+  PlaylistInput: PlaylistInput
   Boolean: Scalars['Boolean']
+  ReleaseInput: ReleaseInput
+  SettingsInput: SettingsInput
+  SocialLinksInput: SocialLinksInput
+  SigninInput: SigninInput
+  TrackInput: TrackInput
+  Int: Scalars['Int']
+  UserInput: UserInput
+  Artist: Artist
+  Mix: Mix
+  Playlist: Playlist
   Release: Release
   Settings: Settings
   SocialLinks: SocialLinks
@@ -513,7 +630,8 @@ export type ArtistResolvers<
     ParentType,
     ContextType
   >
-  owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>
+  modelId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   fans?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>
   countries?: Resolver<
     Maybe<Array<ResolversTypes['String']>>,
@@ -758,6 +876,17 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
+  artist?: Resolver<
+    Maybe<ResolversTypes['Artist']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryArtistArgs, never>
+  >
+  artists?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes['Artist']>>>,
+    ParentType,
+    ContextType
+  >
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>
 }
 
@@ -765,6 +894,12 @@ export type MutationResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = {
+  me?: Resolver<
+    ResolversTypes['User'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationMeArgs, never>
+  >
   signin?: Resolver<
     ResolversTypes['User'],
     ParentType,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   BookmarkOutline,
   ChevronRight,
@@ -9,6 +9,7 @@ import {
   MoreHorizontal,
   Discovery,
   PauseCircleOutline,
+  PersonAdd,
   PlayOutline,
   PlayCircleOutline,
   PlaylistAdd,
@@ -23,7 +24,7 @@ import {
   VolumeMute,
   VolumeOff,
   VolumeUp,
-} from '.';
+} from '.'
 
 export type IconKey =
   | 'bookmark'
@@ -34,6 +35,7 @@ export type IconKey =
   | 'library'
   | 'more'
   | 'news'
+  | 'personAdd'
   | 'playerPause'
   | 'play'
   | 'playerPlay'
@@ -48,12 +50,12 @@ export type IconKey =
   | 'volumeDown'
   | 'volumeMute'
   | 'volumeOff'
-  | 'volumeUp';
+  | 'volumeUp'
 
 interface IRenderIcon {
-  fill: string;
-  icon: IconKey;
-  styles?: any;
+  fill: string
+  icon: IconKey
+  styles?: any
 }
 
 const renderIcon = ({ fill, icon, styles }: IRenderIcon) => {
@@ -66,6 +68,7 @@ const renderIcon = ({ fill, icon, styles }: IRenderIcon) => {
     library: <Library fill={fill} style={styles} />,
     more: <MoreHorizontal fill={fill} style={styles} />,
     news: <Discovery fill={fill} style={styles} />,
+    personAdd: <PersonAdd fill={fill} style={styles} />,
     playerPause: <PauseCircleOutline fill={fill} style={styles} />,
     play: <PlayOutline fill={fill} style={styles} />,
     playlistAdd: <PlaylistAdd fill={fill} style={styles} />,
@@ -81,9 +84,9 @@ const renderIcon = ({ fill, icon, styles }: IRenderIcon) => {
     volumeMute: <VolumeMute fill={fill} style={styles} />,
     volumeOff: <VolumeOff fill={fill} style={styles} />,
     volumeUp: <VolumeUp fill={fill} style={styles} />,
-  };
+  }
 
-  return icons[icon];
-};
+  return icons[icon]
+}
 
-export default renderIcon;
+export default renderIcon

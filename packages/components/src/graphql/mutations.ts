@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 const SIGNIN = gql`
   mutation Signin($input: SigninInput!) {
@@ -21,8 +21,32 @@ const SIGNIN = gql`
       role
       # settings
       token
+      artist {
+        _id
+        id
+        name
+        createdAt
+        countries
+        biography
+        releases {
+          _id
+          title
+          tracks {
+            _id
+          }
+          coverImage
+          publishDate
+        }
+        tag
+        socialLinks {
+          type
+          url
+        }
+        website
+        galleryImages
+      }
     }
   }
-`;
+`
 
-export { SIGNIN };
+export { SIGNIN }

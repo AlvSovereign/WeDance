@@ -1,7 +1,7 @@
 import { FC, forwardRef, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { ITheme } from 'components/src/hooks/useAppTheme'
-import { Text } from '../..'
+import { Text } from '../../..'
 
 interface InputProps {
   className: string
