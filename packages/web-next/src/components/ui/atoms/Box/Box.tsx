@@ -10,11 +10,16 @@ interface BoxProps {
   flex: number
   justify: 'flex-start' | 'flex-end' | 'center'
   position: 'absolute' | 'fixed' | 'relative'
+  [key: string]: any
 }
 
-const Box: FC<BoxProps> = ({ as, children, className }) => {
+const Box: FC<BoxProps> = ({ as, children, className, ...rest }) => {
   const Component = as || 'div'
-  return <Component className={className}>{children}</Component>
+  return (
+    <Component className={className} {...rest}>
+      {children}
+    </Component>
+  )
 }
 
 const StyledBox = styled((props: any) => <Box {...props} />)`

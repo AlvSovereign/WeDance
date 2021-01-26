@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
+import { TColor } from 'components/src/contexts/MsqThemeContext/color'
 import { ITheme } from 'components/src/contexts/MsqThemeContext/MsqThemeContext'
 import { IconKey, renderIcon } from 'components/src/assets/icons'
 import { Text } from '../../..'
@@ -12,13 +13,15 @@ export type Variant =
   | 'secondary'
   | 'transparent'
 
+type Icon = { fill: TColor; icon: IconKey }
+
 interface ButtonProps {
+  children?: ReactNode
   className: string
-  leftIcon?: IconKey
+  leftIcon?: Icon
   isDisabled?: boolean
   onClick: () => void
-  rightIcon?: IconKey
-  forwardStyles?: StyleProp<any>
+  rightIcon?: Icon
   text?: string
   variant: Variant
 }
@@ -63,6 +66,7 @@ const partialStyles = (
 }
 
 const Button: FC<ButtonProps> = ({
+  children,
   className,
   isDisabled,
   leftIcon,
@@ -93,14 +97,15 @@ const Button: FC<ButtonProps> = ({
       //   !isDisabled && pressed && styles.pressed,
       //   forwardStyles,
       // ]}
+
       type="button"
     >
       {leftIcon &&
         renderIcon({
-          fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],
-          icon: leftIcon,
+          fill: (isDisabled ? LIGHTGREY_500 : leftIcon.fill) as string,
+          icon: leftIcon.icon,
         })}
-      {text && (
+      {text ? (
         <Text
           as="span"
           // style={[
@@ -114,7 +119,9 @@ const Button: FC<ButtonProps> = ({
         >
           {text.toUpperCase()}
         </Text>
-      )}
+      ) : null}
+
+      {children}
       {rightIcon &&
         renderIcon({
           fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],

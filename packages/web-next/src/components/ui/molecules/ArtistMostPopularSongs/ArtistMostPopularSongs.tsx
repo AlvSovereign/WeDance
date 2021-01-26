@@ -26,11 +26,18 @@ const ArtistMostPopularSongs: FC<ArtistMostPopularSongsProps> = ({
 
   return (
     <Box direction="column">
-      <Text as="h3" color="white" variant="h5">
+      <Text as="h3" color="white" gutterBottom="sm" variant="h5">
         {t('mostPopularSongs')}
       </Text>
       {releasesByArtist.every((release) => release.isSuccess) ? (
-        <Box direction="column">
+        <Box
+          css={{
+            'button:last-child': {
+              marginBottom: 0,
+            },
+          }}
+          direction="column"
+        >
           {releasesByArtist
             .map((release) =>
               getTopPlays({
@@ -42,8 +49,12 @@ const ArtistMostPopularSongs: FC<ArtistMostPopularSongsProps> = ({
               }),
             )
             .flat()
-            .map((track) => (
-              <TrackCard key={track?._id} track={track} />
+            .map((track, index, array) => (
+              <TrackCard
+                key={track?._id}
+                trackNo={`${array.length < 10 ? 0 : ''}${index + 1}`}
+                track={track}
+              />
             ))}
         </Box>
       ) : null}

@@ -44,7 +44,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>wedance</title>
+        </Head>
         <body>
           <Main />
           <NextScript />

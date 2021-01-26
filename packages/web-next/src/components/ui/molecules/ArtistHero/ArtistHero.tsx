@@ -35,6 +35,7 @@ const ArtistHero: FC<ArtistHeroProps> = ({
   windowSize,
 }) => {
   const { countries, name, releases, tag } = data
+  const { LINEAR_LG, LINEAR_SM, LINEAR_XXL, WHITE } = theme
 
   return (
     <Box
@@ -57,7 +58,16 @@ const ArtistHero: FC<ArtistHeroProps> = ({
           src={ArtistHeroImage}
         />
       </div>
-      <Box direction="column" flex={0.5} justify="flex-end">
+      <Box
+        css={{
+          marginBottom: LINEAR_XXL,
+          paddingLeft: LINEAR_LG,
+          paddingRight: LINEAR_LG,
+        }}
+        direction="column"
+        flex={windowSize === 'lg' ? 0.5 : 1}
+        justify="flex-end"
+      >
         <Text as="h1" color="white" gutterBottom="xxs" variant="hero">
           {name}
         </Text>
@@ -68,24 +78,24 @@ const ArtistHero: FC<ArtistHeroProps> = ({
           css={{ marginBottom: theme.LINEAR_XL }}
           countries={countries}
         /> */}
-        <Box css={{ marginBottom: theme.LINEAR_XXL }} direction="row">
+        <Box css={{ marginBottom: LINEAR_XXL }} direction="row">
           <Button
-            css={{ flex: 1, marginRight: theme.LINEAR_SM }}
+            css={{ flex: 1, marginRight: LINEAR_SM }}
             onClick={onPlayClick}
-            rightIcon="play"
+            rightIcon={{ fill: WHITE, icon: 'play' }}
             text={t('play')}
             variant="primary"
           />
           <Button
-            css={{ flex: 0.25, marginRight: theme.LINEAR_SM }}
+            css={{ flex: 0.25, marginRight: LINEAR_SM }}
             onClick={onFollowClick}
-            rightIcon="personAdd"
+            rightIcon={{ fill: WHITE, icon: 'personAdd' }}
             variant="transparent"
           />
           <Button
             css={{ flex: 0.25 }}
             onClick={onShareClick}
-            rightIcon="share"
+            rightIcon={{ fill: WHITE, icon: 'share' }}
             variant="transparent"
           />
         </Box>

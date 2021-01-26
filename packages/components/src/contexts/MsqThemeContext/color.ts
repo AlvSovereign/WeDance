@@ -3,9 +3,9 @@ const interaction = {
   ALERT: '#FFB201',
   BACKGROUND: '#F5F9FB',
   ERROR: '#FF0000',
-  WHITE: '#FFFFFF',
+  WHITE: 'rgba(255, 255, 255, 0.87)',
   BLACK: '#000000',
-};
+}
 
 const palette = {
   RED_50: '#F9DFE3',
@@ -21,19 +21,23 @@ const palette = {
   BLUE_700: '#0041CF',
   BLUE_900: '#00328C',
   BLUE_FB: '#3B5998',
+  DARKGREY_50: '#C5C6CD',
+  DARKGREY_100: '#A1A2A9',
+  DARKGREY_200: '#61646A',
+  DARKGREY_300: '#3E4046',
   DARKGREY_400: '#1D1E23',
   DARKGREY_500: '#1F2025',
   DARKGREY_700: '#121317',
-};
+}
 
 const color = {
   ...palette,
   ...interaction,
-};
+}
 
-export default color;
+export default color
 
-export type TColor = { [key in TPalette]: string };
+export type TColor = { [key in TPalette]: string }
 
 export type TPalette =
   | 'RED_50'
@@ -49,6 +53,10 @@ export type TPalette =
   | 'BLUE_700'
   | 'BLUE_900'
   | 'BLUE_FB'
+  | 'DARKGREY_50'
+  | 'DARKGREY_100'
+  | 'DARKGREY_200'
+  | 'DARKGREY_300'
   | 'DARKGREY_400'
   | 'DARKGREY_500'
   | 'DARKGREY_700'
@@ -57,4 +65,4 @@ export type TPalette =
   | 'BACKGROUND'
   | 'ERROR'
   | 'WHITE'
-  | 'BLACK';
+  | 'BLACK'

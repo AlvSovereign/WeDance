@@ -28,7 +28,7 @@ export type TextVariant =
   | 'small'
   | 'stats'
   | 'title'
-
+type Weights = 300 | 400 | 500 | 600
 interface TextProps extends AccessibilityProps {
   accessibilityRole?: any
   ariaLevel?: any
@@ -39,6 +39,7 @@ interface TextProps extends AccessibilityProps {
   style?: StyleProp<TextStyle>
   textAlign?: 'left' | 'center' | 'right'
   variant: TextVariant
+  weight?: Weights
 }
 
 const Text: FC<TextProps> = ({

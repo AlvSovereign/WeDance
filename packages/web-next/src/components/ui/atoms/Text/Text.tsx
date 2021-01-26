@@ -2,9 +2,13 @@ import { FC, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { TSpacing } from 'components/src/contexts/MsqThemeContext/spacing'
+import { useTheme } from '@emotion/react'
+import { clsx } from 'components/src/utils'
 
 type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
 export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+type Weights = 300 | 400 | 500 | 600
+
 interface TextProps {
   as: any
   children: ReactNode
@@ -12,6 +16,7 @@ interface TextProps {
   color: Colors
   gutterBottom?: TGutterBottom
   variant: TextVariant
+  weight?: Weights
 }
 export type TextVariant =
   | 'body1'
@@ -26,7 +31,6 @@ export type TextVariant =
   | 'h6'
   | 'inputLabel'
   | 'small'
-  | 'stats'
   | 'title'
 
 const colorStyles = (color: Colors, theme: ITheme) => {
@@ -68,38 +72,49 @@ const gutterBottomStyles = (
   return mapper[gutterBottom]
 }
 
-const Text: FC<TextProps> = ({ as, children, className }) => {
-  const Component = as || 'p'
+const Text: FC<TextProps> = ({
+  as,
+  children,
+  className,
+  color,
+  gutterBottom,
+  variant,
+  weight,
+}) => {
+  const theme = useTheme() as ITheme
+  const {
+    LINEAR_XXS,
+    LINEAR_XS,
+    LINEAR_SM,
+    LINEAR_MD,
+    LINEAR_LG,
+    LINEAR_XL,
+    LINEAR_XXL,
+  } = theme as ITheme
 
-  return <Component className={className}>{children}</Component>
+  const Component = as || 'p'
+  return (
+    <Component
+      className={className}
+      css={clsx([
+        (variant || as) && theme[variant || as],
+        color && colorStyles(color, theme),
+        gutterBottom &&
+          gutterBottomStyles(gutterBottom!, {
+            LINEAR_XXS,
+            LINEAR_XS,
+            LINEAR_SM,
+            LINEAR_MD,
+            LINEAR_LG,
+            LINEAR_XL,
+            LINEAR_XXL,
+          }),
+        weight && { fontWeight: weight },
+      ])}
+    >
+      {children}
+    </Component>
+  )
 }
 
-const StyledText = styled((props: any) => <Text {...props} />)`
-  ${({ as, color, gutterBottom, theme, variant }) => {
-    const {
-      LINEAR_XXS,
-      LINEAR_XS,
-      LINEAR_SM,
-      LINEAR_MD,
-      LINEAR_LG,
-      LINEAR_XL,
-      LINEAR_XXL,
-    } = theme
-
-    return {
-      ...theme[variant || as],
-      ...colorStyles(color, theme),
-      ...gutterBottomStyles(gutterBottom, {
-        LINEAR_XXS,
-        LINEAR_XS,
-        LINEAR_SM,
-        LINEAR_MD,
-        LINEAR_LG,
-        LINEAR_XL,
-        LINEAR_XXL,
-      }),
-    }
-  }}
-`
-
-export default StyledText
+export default Text

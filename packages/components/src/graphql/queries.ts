@@ -70,6 +70,7 @@ const GET_RELEASES_BY_ARTIST = gql`
       releaseType
       tracks {
         _id
+        coverImage
         credits
         filename
         genre

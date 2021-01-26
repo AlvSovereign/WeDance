@@ -60,5 +60,6 @@ export {
 export type { IconKey }
 
 export interface IIcon extends React.SVGProps<SVGSVGElement> {
+  [key: string]: any
   style?: any
 }
