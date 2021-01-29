@@ -11,6 +11,7 @@ export type Variant =
   | 'google'
   | 'primary'
   | 'secondary'
+  | 'link'
   | 'transparent'
 
 type Icon = { fill: TColor; icon: IconKey }
@@ -46,6 +47,17 @@ const partialStyles = (
         color: BLACK,
       },
     },
+    link: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      height: 'auto',
+      padding: 0,
+      width: 'auto',
+      '& *': {
+        cursor: 'pointer',
+      },
+    },
     primary: {
       backgroundColor: BLUE_500,
       borderColor: BLUE_500,
@@ -59,6 +71,14 @@ const partialStyles = (
       span: {
         color: BLUE_500,
       },
+    },
+    transparent: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      height: 'auto',
+      padding: 0,
+      width: 'auto',
     },
   }
 
@@ -147,9 +167,7 @@ const StyledButton = styled((props: any) => <Button {...props} />)`
   }) => {
     const { BLACK, BLUE_500, BLUE_FB, LINEAR_MD, LINEAR_SM, WHITE } = theme
     return {
-      ...partialStyles({ BLACK, BLUE_500, BLUE_FB, WHITE }, variant),
       alignItems: 'center',
-      alignSelf: 'center',
       borderRadius: 4,
       borderStyle: 'solid',
       borderWidth: 2,
@@ -160,6 +178,7 @@ const StyledButton = styled((props: any) => <Button {...props} />)`
       paddingLeft: LINEAR_MD,
       paddingRight: LINEAR_MD,
       width: '100%',
+      ...partialStyles({ BLACK, BLUE_500, BLUE_FB, WHITE }, variant),
       '&:active': {
         transform: 'scale(0.98)',
       },

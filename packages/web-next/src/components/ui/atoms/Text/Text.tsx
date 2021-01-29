@@ -31,6 +31,8 @@ export type TextVariant =
   | 'inputLabel'
   | 'small'
   | 'title'
+  | 'trackCardPlays'
+  | 'trackCardTitle'
 
 const colorStyles = (color: Colors, theme: ITheme) => {
   const mapper = {

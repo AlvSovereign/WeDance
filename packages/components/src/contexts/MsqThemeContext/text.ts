@@ -130,20 +130,31 @@ export const Text = {
     lineHeight: '12px',
     textTransform: 'uppercase',
   },
-  trackCard: {
+  trackCardTitle: {
     fontSize: 12,
     fontFamily: 'Geomanist',
+    fontWeight: 400,
+    letterSpacing: '0.3px',
+    lineHeight: '12px',
+  },
+  trackCardPlays: {
+    fontSize: 12,
+    fontFamily: 'Geomanist',
+    fontWeight: 400,
+    letterSpacing: '0.3px',
     lineHeight: '12px',
   },
   title: {
     fontSize: 14,
-    fontFamily: 'Geomanist-Bold',
+    fontFamily: 'Geomanist',
+    fontWeight: 600,
     letterSpacing: '0.2px',
     lineHeight: '14px',
   },
   subtitle: {
     fontSize: 12,
-    fontFamily: 'Geomanist-Bold',
+    fontFamily: 'Geomanist',
+    fontWeight: 600,
     letterSpacing: '0.2px',
     lineHeight: '12px',
   },
@@ -155,13 +166,15 @@ export const Text = {
   },
   body1: {
     fontSize: 14,
-    fontFamily: 'Geomanist-Book',
+    fontFamily: 'Geomanist',
+    fontWeight: 600,
     letterSpacing: '0.2px',
     lineHeight: '14px',
   },
   body2: {
     fontSize: 12,
-    fontFamily: 'Geomanist-Book',
+    fontFamily: 'Geomanist',
+    fontWeight: 600,
     letterSpacing: '0.2px',
     lineHeight: '12px',
   },
@@ -192,14 +205,15 @@ type TTextTypes =
   | 'inputError'
   | 'inputLabel'
   | 'inputText'
-  | 'title'
-  | 'trackCard'
   | 'subtitle'
   | 'lead'
   | 'body1'
   | 'body2'
   | 'small'
   | 'tiny'
+  | 'title'
+  | 'trackCard'
+  | 'trackCardTitle'
   | 'button'
 
 export type TText = { [key in TTextTypes]: any }
