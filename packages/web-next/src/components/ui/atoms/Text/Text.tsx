@@ -1,18 +1,17 @@
-import { FC, ReactNode } from 'react'
-import styled from '@emotion/styled'
+import React, { FC, ReactNode } from 'react'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { TSpacing } from 'components/src/contexts/MsqThemeContext/spacing'
 import { useTheme } from '@emotion/react'
 import { clsx } from 'components/src/utils'
 
-type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
+export type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
 export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 type Weights = 300 | 400 | 500 | 600
 
 interface TextProps {
   as: any
   children: ReactNode
-  className: string
+  className?: string
   color: Colors
   gutterBottom?: TGutterBottom
   variant: TextVariant
