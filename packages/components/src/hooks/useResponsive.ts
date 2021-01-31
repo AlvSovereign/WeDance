@@ -3,7 +3,7 @@ import { useDimensions } from '@react-native-community/hooks'
 
 const useResponsive = () => {
   const { width } = useDimensions().window
-  const [size, setSize] = useState<TBreakpoint>('sm')
+  const [size, setSize] = useState<TBreakpoint>('lg')
 
   let windowSize: TBreakpoint
 

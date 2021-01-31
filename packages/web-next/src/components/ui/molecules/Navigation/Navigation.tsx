@@ -15,6 +15,7 @@ interface NavigationProps {
 const Navigation: FC<NavigationProps> = ({ className }) => {
   const { t } = useTranslation(['nav'])
   const windowSize = useResponsive()
+  console.log('windowSize: ', windowSize)
 
   return (
     <nav

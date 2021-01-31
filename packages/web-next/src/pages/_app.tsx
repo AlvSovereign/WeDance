@@ -11,6 +11,7 @@ import GlobalStyles from '../styles/GlobalStyles'
 import { routes } from '../utils'
 import 'react-placeholder/lib/reactPlaceholder.css'
 import './index.css'
+import Head from 'next/head'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,9 @@ function App({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
+          <Head>
+            <title>wedance</title>
+          </Head>
           <GlobalStyles />
           <main css={{ display: 'flex', flexDirection: 'row' }}>
             {router.pathname === routes.SIGNIN ? null : <Navigation />}
