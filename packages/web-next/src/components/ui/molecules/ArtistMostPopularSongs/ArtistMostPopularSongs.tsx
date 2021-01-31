@@ -1,13 +1,15 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import { useTheme } from '@emotion/react'
 import { TFunction } from 'react-i18next'
 import { Release, Track } from 'components/src/graphql/types'
+import { ITheme } from 'components/src/hooks/useAppTheme'
 import { Box, Text, TrackCard } from '../../..'
 import { useGetReleasesByArtist } from '../../../../pages/hooks'
 import { getTopPlays } from '../../../../utils'
 
 interface ArtistMostPopularSongsProps {
   initialData: Release[]
-  releases: Release[] | null | undefined
+  releases: Release[]
   t: TFunction
 }
 
@@ -16,17 +18,28 @@ const ArtistMostPopularSongs: FC<ArtistMostPopularSongsProps> = ({
   releases,
   t,
 }) => {
+  const theme = useTheme() as ITheme
+  const { DARKGREY_100 } = theme
+
   const releasesByArtist = useGetReleasesByArtist(releases, {
     initialData,
+    enabled: !!releases.length,
   })
-
-  if (!releases) {
-    return null
-  }
 
   return (
     <Box direction="column">
-      <Text as="h3" color="white" gutterBottom="sm" variant="h5">
+      <Text
+        component="h3"
+        color="white"
+        gutterBottom="sm"
+        isReady={!!initialData?.length || !!releases.length}
+        loadingProps={{
+          color: DARKGREY_100,
+          style: { height: 20 },
+          type: 'textRow',
+        }}
+        variant="h5"
+      >
         {t('mostPopularSongs')}
       </Text>
       {releasesByArtist.every((release) => release.isSuccess) ? (

@@ -213,6 +213,7 @@ type TTextTypes =
   | 'tiny'
   | 'title'
   | 'trackCard'
+  | 'trackCardPlays'
   | 'trackCardTitle'
   | 'button'
 

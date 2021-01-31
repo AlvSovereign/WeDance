@@ -15,8 +15,9 @@ interface TrackCardProps {
 
 const TrackCard: FC<TrackCardProps> = ({ onClickPlay, trackNo, track }) => {
   const [hovered, setHover] = useState<boolean>(false)
-  const theme = useTheme()
+  const theme = useTheme() as ITheme
   const {
+    DARKGREY_100,
     DARKGREY_300,
     DARKGREY_400,
     LINEAR_MD,
@@ -55,6 +56,12 @@ const TrackCard: FC<TrackCardProps> = ({ onClickPlay, trackNo, track }) => {
         },
       }}
       direction="row"
+      isReady={!!track}
+      loadingProps={{
+        color: DARKGREY_100,
+        style: { height: 50 },
+        type: 'textRow',
+      }}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
@@ -147,7 +154,7 @@ const TrackCard: FC<TrackCardProps> = ({ onClickPlay, trackNo, track }) => {
         </Link>
       </Box>
       <Box align="center">
-        <Text as="span" color="lightGrey" variant="trackCardPlays">
+        <Text component="span" color="lightGrey" variant="trackCardPlays">
           {plays}
         </Text>
         <Button

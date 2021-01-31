@@ -1,6 +1,7 @@
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import { ITheme } from 'components/src/hooks/useAppTheme'
 
 interface PageProps {
   backgroundImage?: string
@@ -27,12 +28,20 @@ const Page: FC<PageProps> = ({ backgroundImage, children, className }) => {
 }
 
 const StyledPage = styled((props: any) => <Page {...props} />)`
-  ${({ backgroundImage }: { backgroundImage: string }) => ({
+  ${({
+    backgroundImage,
+    theme,
+  }: {
+    backgroundImage: string
+    theme: ITheme
+  }) => ({
+    backgroundColor: backgroundImage ? 'none' : theme.BACKGROUND,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     minHeight: '100vh',
     width: '100%',
+    zIndex: 0,
     '.img-container': {
       zIndex: backgroundImage ? -1 : 0,
     },

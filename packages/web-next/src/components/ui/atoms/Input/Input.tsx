@@ -29,7 +29,12 @@ const Input: FC<InputProps> = ({
   return (
     <div className={className}>
       {label ? (
-        <Text as="label" color="lightGrey" htmlFor={name} variant="inputLabel">
+        <Text
+          component="label"
+          color="lightGrey"
+          htmlFor={name}
+          variant="inputLabel"
+        >
           {label}
         </Text>
       ) : null}
@@ -43,7 +48,7 @@ const Input: FC<InputProps> = ({
         />
       </div>
       {isInvalid && invalidText && typeof invalidText === 'string' ? (
-        <Text as="p" color="error" variant="inputError">
+        <Text component="p" color="error" variant="inputError">
           {invalidText}
         </Text>
       ) : (

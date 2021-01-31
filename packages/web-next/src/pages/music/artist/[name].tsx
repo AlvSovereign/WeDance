@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { GET_ARTIST, GET_ARTISTS } from 'components'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -7,7 +7,7 @@ import { dehydrate } from 'react-query/hydration'
 import { useTheme } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import { useResponsive } from 'components/src/hooks'
-import { Artist, ArtistQuery, Release } from 'components/src/graphql/types'
+import { Artist, Release } from 'components/src/graphql/types'
 import { ArtistHero, Page } from '../../../components'
 import { fetcher } from '../../../utils'
 import { useGetArtist } from '../../hooks'
@@ -18,30 +18,28 @@ interface ArtistPageProps {
 }
 
 const ArtistPage: FC<ArtistPageProps> = ({ initialArtistReleaseData }) => {
-  const theme = useTheme()
   const { t } = useTranslation(['artist'])
   const windowSize = useResponsive()
   const router = useRouter()
   const { data, isLoading } = useGetArtist(router.query.name)
-  const { name, tag } = data.artist
 
   return (
     <Page>
       <Head>
-        <title>{`${name} - ${tag} || wedance`}</title>
+        <title>{`${isLoading ? 'Loading...' : data?.artist?.name} - ${
+          isLoading ? 'Loading...' : data?.artist?.tag
+        } || wedance`}</title>
       </Head>
-      {!isLoading ? (
-        <ArtistHero
-          initialArtistReleaseData={initialArtistReleaseData}
-          data={(data as ArtistQuery)?.artist}
-          onFollowClick={() => {}}
-          onPlayClick={() => {}}
-          onShareClick={() => {}}
-          t={t}
-          theme={theme}
-          windowSize={windowSize}
-        />
-      ) : null}
+      <ArtistHero
+        artistDataLoading={isLoading}
+        data={data?.artist}
+        initialArtistReleaseData={initialArtistReleaseData}
+        onFollowClick={() => {}}
+        onPlayClick={() => {}}
+        onShareClick={() => {}}
+        t={t}
+        windowSize={windowSize}
+      />
     </Page>
   )
 }

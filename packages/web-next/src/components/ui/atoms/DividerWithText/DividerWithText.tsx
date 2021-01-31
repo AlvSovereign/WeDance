@@ -11,7 +11,7 @@ const DividerWithText: FC<DividerWithTextProps> = ({ className, text }) => {
   return (
     <Box align="center" className={className} direction="row">
       <hr />
-      <Text as="span" color="lightGrey" variant="body1">
+      <Text component="span" color="lightGrey" variant="body1">
         {text}
       </Text>
       <hr />

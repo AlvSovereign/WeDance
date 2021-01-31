@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import Image from 'next/image'
 import { TFunction } from 'react-i18next'
 import { TBreakpoint } from 'components/src/hooks/useResponsive'
@@ -12,30 +12,38 @@ import {
   CountryFlags,
   Text,
 } from '../../..'
+import { useTheme } from '@emotion/react'
 
 interface ArtistHeroProps {
+  artistDataLoading: boolean
   data: Artist
   initialArtistReleaseData: Release[]
   onFollowClick: () => void
   onPlayClick: () => void
   onShareClick: () => void
   t: TFunction
-  theme: ITheme
   windowSize: TBreakpoint
 }
 
 const ArtistHero: FC<ArtistHeroProps> = ({
+  artistDataLoading,
   data,
   initialArtistReleaseData,
   onFollowClick,
   onPlayClick,
   onShareClick,
   t,
-  theme,
   windowSize,
 }) => {
-  const { countries, name, releases, tag } = data
-  const { LINEAR_LG, LINEAR_SM, LINEAR_XXL, WHITE } = theme
+  const theme = useTheme() as ITheme
+  const {
+    DARKGREY_100,
+    LINEAR_LG,
+    LINEAR_SM,
+    LINEAR_XL,
+    LINEAR_XXL,
+    WHITE,
+  } = theme
 
   return (
     <Box
@@ -61,18 +69,40 @@ const ArtistHero: FC<ArtistHeroProps> = ({
       <Box
         css={{
           marginBottom: LINEAR_XXL,
-          paddingLeft: LINEAR_LG,
+          paddingLeft: LINEAR_XL,
           paddingRight: LINEAR_LG,
         }}
         direction="column"
         flex={windowSize === 'lg' ? 0.5 : 1}
         justify="flex-end"
       >
-        <Text as="h1" color="white" gutterBottom="xxs" variant="hero">
-          {name}
+        <Text
+          component="h1"
+          color="white"
+          gutterBottom="xxs"
+          isReady={!!data?.name}
+          loadingProps={{
+            color: DARKGREY_100,
+            style: { height: 64 },
+            type: 'textRow',
+          }}
+          variant="hero"
+        >
+          {data?.name}
         </Text>
-        <Text as="p" color="white" gutterBottom="xs" variant="body1">
-          {tag}
+        <Text
+          component="p"
+          color="white"
+          gutterBottom="xs"
+          isReady={!!data?.tag}
+          loadingProps={{
+            color: DARKGREY_100,
+            style: { height: 14 },
+            type: 'textRow',
+          }}
+          variant="body1"
+        >
+          {data?.tag}
         </Text>
         {/* <CountryFlags
           css={{ marginBottom: theme.LINEAR_XL }}
@@ -81,6 +111,12 @@ const ArtistHero: FC<ArtistHeroProps> = ({
         <Box css={{ marginBottom: LINEAR_XXL }} direction="row">
           <Button
             css={{ flex: 1, marginRight: LINEAR_SM }}
+            isReady={!!data}
+            loadingProps={{
+              color: DARKGREY_100,
+              style: { height: 40 },
+              type: 'textRow',
+            }}
             onClick={onPlayClick}
             rightIcon={{ fill: WHITE, icon: 'play' }}
             text={t('play')}
@@ -101,7 +137,7 @@ const ArtistHero: FC<ArtistHeroProps> = ({
         </Box>
         <ArtistMostPopularSongs
           initialData={initialArtistReleaseData}
-          releases={releases}
+          releases={(data?.releases || []) as Release[]}
           t={t}
         />
       </Box>

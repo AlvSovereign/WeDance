@@ -33,12 +33,14 @@
     "react-native-svg": "^12.1.0",
     "react-native-svg-flagkit": "^0.9.5",
     "react-native-web": "0.14.8",
+    "react-placeholder": "^4.0.3",
     "react-query": "^3.5.16"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
+    "@emotion/babel-plugin": "^11.1.2",
     "@emotion/jest": "^11.1.0",
     "@types/jest": "^26.0.20",
     "@types/next-auth": "^3.1.21",

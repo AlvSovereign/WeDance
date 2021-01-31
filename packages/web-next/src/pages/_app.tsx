@@ -1,3 +1,4 @@
+import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Hydrate } from 'react-query/hydration'
@@ -8,6 +9,7 @@ import { useAppTheme } from 'components/src/hooks'
 import { Navigation } from '../components'
 import GlobalStyles from '../styles/GlobalStyles'
 import { routes } from '../utils'
+import 'react-placeholder/lib/reactPlaceholder.css'
 import './index.css'
 
 const queryClient = new QueryClient({

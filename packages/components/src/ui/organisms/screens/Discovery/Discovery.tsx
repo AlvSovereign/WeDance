@@ -5,7 +5,7 @@ interface DiscoveryProps {}
 
 const Discovery: FC<DiscoveryProps> = ({}) => {
   return (
-    <Text as="h1" variant="hero">
+    <Text component="h1" variant="hero">
       Discovery Page
     </Text>
   )

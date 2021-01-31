@@ -1,7 +1,8 @@
 import React, { FC, ReactNode } from 'react'
+import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
+import { useTheme } from '@emotion/react'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { TSpacing } from 'components/src/contexts/MsqThemeContext/spacing'
-import { useTheme } from '@emotion/react'
 import { clsx } from 'components/src/utils'
 
 export type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
@@ -9,11 +10,13 @@ export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 type Weights = 300 | 400 | 500 | 600
 
 interface TextProps {
-  as: any
   children: ReactNode
   className?: string
   color: Colors
+  component: keyof HTMLElementTagNameMap
   gutterBottom?: TGutterBottom
+  isReady?: boolean
+  loadingProps?: RPProps
   variant: TextVariant
   weight?: Weights
 }
@@ -74,11 +77,13 @@ const gutterBottomStyles = (
 }
 
 const Text: FC<TextProps> = ({
-  as,
   children,
   className,
   color,
+  component: Component = 'p' as any,
   gutterBottom,
+  isReady = true,
+  loadingProps,
   variant,
   weight,
 }) => {
@@ -93,28 +98,29 @@ const Text: FC<TextProps> = ({
     LINEAR_XXL,
   } = theme as ITheme
 
-  const Component = as || 'p'
   return (
-    <Component
-      className={className}
-      css={clsx([
-        (variant || as) && theme[variant || as],
-        color && colorStyles(color, theme),
-        gutterBottom &&
-          gutterBottomStyles(gutterBottom!, {
-            LINEAR_XXS,
-            LINEAR_XS,
-            LINEAR_SM,
-            LINEAR_MD,
-            LINEAR_LG,
-            LINEAR_XL,
-            LINEAR_XXL,
-          }),
-        weight && { fontWeight: weight },
-      ])}
-    >
-      {children}
-    </Component>
+    <ReactPlaceholder {...loadingProps} ready={isReady} showLoadingAnimation>
+      <Component
+        className={className}
+        css={clsx([
+          (variant || Component) && theme[variant || Component],
+          color && colorStyles(color, theme),
+          gutterBottom &&
+            gutterBottomStyles(gutterBottom!, {
+              LINEAR_XXS,
+              LINEAR_XS,
+              LINEAR_SM,
+              LINEAR_MD,
+              LINEAR_LG,
+              LINEAR_XL,
+              LINEAR_XXL,
+            }),
+          weight && { fontWeight: weight },
+        ])}
+      >
+        {children}
+      </Component>
+    </ReactPlaceholder>
   )
 }
 

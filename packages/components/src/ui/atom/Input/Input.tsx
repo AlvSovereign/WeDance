@@ -131,7 +131,7 @@ const Input: FC<InputProps> = forwardRef(
           )}
         </View>
         {isInvalid && invalidText && typeof invalidText === 'string' ? (
-          <Text as="p" color="error" variant="body2">
+          <Text component="p" color="error" variant="body2">
             {invalidText}
           </Text>
         ) : (

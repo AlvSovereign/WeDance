@@ -1,36 +1,56 @@
-import styled from '@emotion/styled'
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
+import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
 
 interface BoxProps {
-  align: 'flex-start' | 'flex-end' | 'center'
-  as?: any
+  align?: 'flex-start' | 'flex-end' | 'center'
+  component?: keyof HTMLElementTagNameMap
   children: ReactNode
-  className: string
-  direction: 'column' | 'row'
-  flex: number
-  justify: 'flex-start' | 'flex-end' | 'center'
-  position: 'absolute' | 'fixed' | 'relative'
+  className?: string
+  direction?: 'column' | 'row'
+  flex?: number
+  isReady?: boolean
+  justify?: 'flex-start' | 'flex-end' | 'center'
+  loadingProps?: RPProps
+  position?: 'absolute' | 'fixed' | 'relative'
   [key: string]: any
 }
 
-const Box: FC<BoxProps> = ({ as, children, className, ...rest }) => {
-  const Component = as || 'div'
+const Box: FC<BoxProps> = ({
+  align,
+  children,
+  className,
+  component: Component = 'div' as any,
+  direction,
+  flex,
+  isReady = true,
+  justify,
+  loadingProps,
+  position,
+  ...rest
+}) => {
   return (
-    <Component className={className} {...rest}>
-      {children}
-    </Component>
+    <ReactPlaceholder
+      {...loadingProps}
+      ready={isReady}
+      showLoadingAnimation
+      type="rect"
+    >
+      <Component
+        className={className}
+        css={{
+          alignItems: align,
+          display: 'flex',
+          flex,
+          flexDirection: direction,
+          justifyContent: justify,
+          position,
+        }}
+        {...rest}
+      >
+        {children}
+      </Component>
+    </ReactPlaceholder>
   )
 }
 
-const StyledBox = styled((props: any) => <Box {...props} />)`
-  ${({ align, direction, flex, justify, position }: BoxProps) => ({
-    alignItems: align,
-    display: 'flex',
-    flex,
-    flexDirection: direction,
-    justifyContent: justify,
-    position,
-  })}
-`
-
-export default StyledBox
+export default Box

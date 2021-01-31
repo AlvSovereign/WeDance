@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { FC } from 'react'
+import React, { FC } from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { ITheme } from 'components/src/hooks/useAppTheme'
+import { useResponsive } from 'components/src/hooks'
 import { useTranslation } from 'react-i18next'
 import { Text } from '../../..'
 import { routes } from '../../../../utils'
-import { useResponsive } from 'components/src/hooks'
 
 interface NavigationProps {
   className: string
@@ -21,7 +21,7 @@ const Navigation: FC<NavigationProps> = ({ className }) => {
       className={className}
       css={{ width: windowSize === 'lg' ? '264px' : '120px' }}
     >
-      <Text as="h3" variant="h3">
+      <Text component="h3" variant="h3">
         wedance
       </Text>
 

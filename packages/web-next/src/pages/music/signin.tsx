@@ -74,10 +74,10 @@ const SignInPage: FC = () => {
           justify="center"
         >
           <div css={{ width: windowSize === 'sm' ? '80%' : '66%' }}>
-            <Text as="h2" color="black" gutterBottom="md" variant="h2">
+            <Text component="h2" color="black" gutterBottom="md" variant="h2">
               {t('title')}
             </Text>
-            <Text as="p" color="black" gutterBottom="md" variant="body1">
+            <Text component="p" color="black" gutterBottom="md" variant="body1">
               {t('subtitle')}
             </Text>
             <Controller

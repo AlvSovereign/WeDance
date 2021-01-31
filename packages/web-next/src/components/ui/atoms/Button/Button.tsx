@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react'
+import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TColor } from 'components/src/contexts/MsqThemeContext/color'
@@ -19,8 +20,10 @@ type Icon = { fill: TColor; icon: IconKey }
 interface ButtonProps {
   children?: ReactNode
   className: string
-  leftIcon?: Icon
   isDisabled?: boolean
+  isReady?: boolean
+  loadingProps?: RPProps
+  leftIcon?: Icon
   onClick: () => void
   rightIcon?: Icon
   text?: string
@@ -89,6 +92,8 @@ const Button: FC<ButtonProps> = ({
   children,
   className,
   isDisabled,
+  isReady = true,
+  loadingProps,
   leftIcon,
   onClick,
   rightIcon,
@@ -106,48 +111,55 @@ const Button: FC<ButtonProps> = ({
   }
 
   return (
-    <button
-      className={className}
-      onClick={onClick}
-      // style={({ hovered, pressed }: any) => [
-      //   styles.buttonBase,
-      //   styles[variant],
-      //   isDisabled && styles.disabled,
-      //   !isDisabled && hovered && styles.buttonHovered,
-      //   !isDisabled && pressed && styles.pressed,
-      //   forwardStyles,
-      // ]}
-
-      type="button"
+    <ReactPlaceholder
+      {...loadingProps}
+      ready={isReady}
+      showLoadingAnimation
+      type="rect"
     >
-      {leftIcon &&
-        renderIcon({
-          fill: (isDisabled ? LIGHTGREY_500 : leftIcon.fill) as string,
-          icon: leftIcon.icon,
-        })}
-      {text ? (
-        <Text
-          as="span"
-          // style={[
-          //   styles.textBase,
-          //   variant === 'primary' && styles.primaryText,
-          //   variant === 'secondary' && styles.secondaryText,
-          //   variant === 'facebook' && styles.facebookText,
-          //   isDisabled && styles.disabledText,
-          // ]}
-          variant="button"
-        >
-          {text.toUpperCase()}
-        </Text>
-      ) : null}
+      <button
+        className={className}
+        onClick={onClick}
+        // style={({ hovered, pressed }: any) => [
+        //   styles.buttonBase,
+        //   styles[variant],
+        //   isDisabled && styles.disabled,
+        //   !isDisabled && hovered && styles.buttonHovered,
+        //   !isDisabled && pressed && styles.pressed,
+        //   forwardStyles,
+        // ]}
 
-      {children}
-      {rightIcon &&
-        renderIcon({
-          fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],
-          icon: rightIcon,
-        })}
-    </button>
+        type="button"
+      >
+        {leftIcon &&
+          renderIcon({
+            fill: (isDisabled ? LIGHTGREY_500 : leftIcon.fill) as string,
+            icon: leftIcon.icon,
+          })}
+        {text ? (
+          <Text
+            component="span"
+            // style={[
+            //   styles.textBase,
+            //   variant === 'primary' && styles.primaryText,
+            //   variant === 'secondary' && styles.secondaryText,
+            //   variant === 'facebook' && styles.facebookText,
+            //   isDisabled && styles.disabledText,
+            // ]}
+            variant="button"
+          >
+            {text.toUpperCase()}
+          </Text>
+        ) : null}
+
+        {children}
+        {rightIcon &&
+          renderIcon({
+            fill: isDisabled ? LIGHTGREY_500 : fillColor[variant],
+            icon: rightIcon,
+          })}
+      </button>
+    </ReactPlaceholder>
   )
 }
 
