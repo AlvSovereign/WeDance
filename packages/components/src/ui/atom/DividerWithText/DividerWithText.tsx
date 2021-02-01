@@ -1,9 +1,6 @@
 import React, { FC, useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import {
-  ITheme,
-  MsqThemeContext,
-} from '../../../contexts/MsqThemeContext/MsqThemeContext'
+import { ITheme, MsqThemeContext } from '../../../theme/MsqThemeContext'
 import { Text } from '../../../..'
 
 interface DividerWithTextProps {

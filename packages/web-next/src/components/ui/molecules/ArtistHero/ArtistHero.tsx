@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
+import { useTheme } from '@emotion/react'
 import { TFunction } from 'react-i18next'
 import { TBreakpoint } from 'components/src/hooks/useResponsive'
 import { ITheme } from 'components/src/hooks/useAppTheme'
@@ -12,10 +13,8 @@ import {
   CountryFlags,
   Text,
 } from '../../..'
-import { useTheme } from '@emotion/react'
 
 interface ArtistHeroProps {
-  artistDataLoading: boolean
   data: Artist
   initialArtistReleaseData: Release[]
   onFollowClick: () => void
@@ -26,7 +25,6 @@ interface ArtistHeroProps {
 }
 
 const ArtistHero: FC<ArtistHeroProps> = ({
-  artistDataLoading,
   data,
   initialArtistReleaseData,
   onFollowClick,
@@ -38,6 +36,8 @@ const ArtistHero: FC<ArtistHeroProps> = ({
   const theme = useTheme() as ITheme
   const {
     DARKGREY_100,
+    DARKGREY_400,
+    DARKGREY_500,
     LINEAR_LG,
     LINEAR_SM,
     LINEAR_XL,
@@ -110,7 +110,7 @@ const ArtistHero: FC<ArtistHeroProps> = ({
         /> */}
         <Box css={{ marginBottom: LINEAR_XXL }} direction="row">
           <Button
-            css={{ flex: 1, marginRight: LINEAR_SM }}
+            css={{ marginRight: LINEAR_SM, width: 200 }}
             isReady={!!data}
             loadingProps={{
               color: DARKGREY_100,
@@ -118,21 +118,36 @@ const ArtistHero: FC<ArtistHeroProps> = ({
               type: 'textRow',
             }}
             onClick={onPlayClick}
-            rightIcon={{ fill: WHITE, icon: 'play' }}
+            icon={{ fill: WHITE, icon: 'play', position: 'left' }}
             text={t('play')}
             variant="primary"
           />
           <Button
-            css={{ flex: 0.25, marginRight: LINEAR_SM }}
+            css={{
+              backgroundColor: DARKGREY_400,
+              borderColor: DARKGREY_500,
+              marginRight: LINEAR_SM,
+              paddingLeft: LINEAR_SM,
+              paddingRight: LINEAR_SM,
+            }}
             onClick={onFollowClick}
-            rightIcon={{ fill: WHITE, icon: 'personAdd' }}
-            variant="transparent"
+            icon={{
+              fill: WHITE,
+              position: 'right',
+              icon: 'personAdd',
+            }}
+            variant="plain"
           />
           <Button
-            css={{ flex: 0.25 }}
+            css={{
+              backgroundColor: DARKGREY_400,
+              borderColor: DARKGREY_500,
+              paddingLeft: LINEAR_SM,
+              paddingRight: LINEAR_SM,
+            }}
             onClick={onShareClick}
-            rightIcon={{ fill: WHITE, icon: 'share' }}
-            variant="transparent"
+            icon={{ fill: WHITE, position: 'right', icon: 'share' }}
+            variant="plain"
           />
         </Box>
         <ArtistMostPopularSongs

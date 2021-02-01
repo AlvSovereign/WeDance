@@ -1,4 +1,4 @@
-export const heading = {
+export const headings = {
   mobile: {
     hero: {
       fontSize: 48,
@@ -103,7 +103,7 @@ export const heading = {
   },
 }
 
-export const Text = {
+const typography = {
   inputError: {
     fontSize: 12,
     fontFamily: 'Geomanist',
@@ -192,7 +192,7 @@ export const Text = {
   },
 }
 
-export default Text
+export default typography
 
 type TTextTypes =
   | 'hero'
@@ -212,9 +212,8 @@ type TTextTypes =
   | 'small'
   | 'tiny'
   | 'title'
-  | 'trackCard'
   | 'trackCardPlays'
   | 'trackCardTitle'
   | 'button'
 
-export type TText = { [key in TTextTypes]: any }
+export type TText = Record<TTextTypes, any>

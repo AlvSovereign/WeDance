@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
-import { useTheme } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import { useResponsive } from 'components/src/hooks'
 import { Artist, Release } from 'components/src/graphql/types'
@@ -31,7 +30,6 @@ const ArtistPage: FC<ArtistPageProps> = ({ initialArtistReleaseData }) => {
         } || wedance`}</title>
       </Head>
       <ArtistHero
-        artistDataLoading={isLoading}
         data={data?.artist}
         initialArtistReleaseData={initialArtistReleaseData}
         onFollowClick={() => {}}

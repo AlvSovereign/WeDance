@@ -7,10 +7,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import { IconKey, renderIcon } from '../../../assets/icons'
-import {
-  ITheme,
-  MsqThemeContext,
-} from '../../../contexts/MsqThemeContext/MsqThemeContext'
+import { ITheme, MsqThemeContext } from '../../../theme/MsqThemeContext'
 import { clsx } from '../../../utils'
 import Text from '../Text/Text'
 

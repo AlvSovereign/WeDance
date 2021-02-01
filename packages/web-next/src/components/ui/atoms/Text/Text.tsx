@@ -2,8 +2,8 @@ import React, { FC, ReactNode } from 'react'
 import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
 import { useTheme } from '@emotion/react'
 import { ITheme } from 'components/src/hooks/useAppTheme'
-import { TSpacing } from 'components/src/contexts/MsqThemeContext/spacing'
 import { clsx } from 'components/src/utils'
+import { TSpacing } from 'components/src/theme/spacing'
 
 export type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
 export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
@@ -12,7 +12,7 @@ type Weights = 300 | 400 | 500 | 600
 interface TextProps {
   children: ReactNode
   className?: string
-  color: Colors
+  color?: Colors
   component: keyof HTMLElementTagNameMap
   gutterBottom?: TGutterBottom
   isReady?: boolean

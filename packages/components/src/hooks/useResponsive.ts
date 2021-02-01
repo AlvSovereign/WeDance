@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDimensions } from '@react-native-community/hooks'
 
 const useResponsive = () => {

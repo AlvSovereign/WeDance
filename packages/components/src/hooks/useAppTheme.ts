@@ -1,21 +1,22 @@
 import { useResponsive } from '.'
-import { color, spacing } from '../..'
-import { TColor } from '../contexts/MsqThemeContext/color'
-import { TSpacing } from '../contexts/MsqThemeContext/spacing'
-import Text, { heading, TText } from '../contexts/MsqThemeContext/text'
+import buttonStyles, { TButtonStyles } from '../theme/button'
+import color, { TColor } from '../theme/color'
+import spacing, { TSpacing } from '../theme/spacing'
+import typography, { headings, TText } from '../theme/text'
 
-export interface ITheme extends TText, TColor, TSpacing {}
+export interface ITheme extends TText, TColor, TSpacing, TButtonStyles {}
 
 const useAppTheme = () => {
   const windowSize = useResponsive()
   const responsiveHeaders = {
-    ...heading[windowSize === 'lg' ? 'desktop' : 'mobile'],
+    ...headings[windowSize === 'lg' ? 'desktop' : 'mobile'],
   }
   const defaultTheme: ITheme = {
     ...color,
     ...spacing,
-    ...Text,
+    ...typography,
     ...responsiveHeaders,
+    ...buttonStyles,
   }
 
   return defaultTheme

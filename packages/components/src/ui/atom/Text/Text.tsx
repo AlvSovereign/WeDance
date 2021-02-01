@@ -6,10 +6,7 @@ import {
   AccessibilityProps,
   TextStyle,
 } from 'react-native'
-import {
-  ITheme,
-  MsqThemeContext,
-} from '../../../contexts/MsqThemeContext/MsqThemeContext'
+import { ITheme, MsqThemeContext } from '../../../theme/MsqThemeContext'
 import { clsx } from '../../../utils'
 
 export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'

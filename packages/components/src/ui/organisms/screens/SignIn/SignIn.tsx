@@ -3,10 +3,7 @@ import { ImageBackground, StyleSheet, View } from 'react-native'
 import { RouteChildrenProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useForm, Controller, FieldValues } from 'react-hook-form'
-import {
-  ITheme,
-  MsqThemeContext,
-} from '../../../../contexts/MsqThemeContext/MsqThemeContext'
+import { ITheme, MsqThemeContext } from '../../../../theme/MsqThemeContext'
 import useResponsive, { TBreakpoint } from '../../../../hooks/useResponsive'
 import { isEmailValid, isEmpty, setToStorage } from '../../../../utils'
 import { Box, Button, DividerWithText, Page, Input, Text } from '../../../../..'

@@ -974,30 +974,7 @@ export type ArtistQuery = {
       | 'tag'
       | 'website'
       | 'galleryImages'
-    > & {
-      releases?: Maybe<
-        Array<
-          Maybe<
-            Pick<Release, '_id'> & {
-              tracks: Array<
-                Pick<
-                  Track,
-                  | '_id'
-                  | 'credits'
-                  | 'filename'
-                  | 'genre'
-                  | 'label'
-                  | 'likes'
-                  | 'plays'
-                  | 'title'
-                  | 'url'
-                >
-              >
-            }
-          >
-        >
-      >
-    }
+    > & { releases?: Maybe<Array<Maybe<Pick<Release, '_id'>>>> }
   >
 }
 
@@ -1029,6 +1006,7 @@ export type GetReleasesByArtistQuery = {
       Pick<
         Track,
         | '_id'
+        | 'coverImage'
         | 'credits'
         | 'filename'
         | 'genre'
@@ -1201,17 +1179,6 @@ export const ArtistDocument = gql`
       url
       releases {
         _id
-        tracks {
-          _id
-          credits
-          filename
-          genre
-          label
-          likes
-          plays
-          title
-          url
-        }
       }
       tag
       website
@@ -1330,6 +1297,7 @@ export const GetReleasesByArtistDocument = gql`
       releaseType
       tracks {
         _id
+        coverImage
         credits
         filename
         genre

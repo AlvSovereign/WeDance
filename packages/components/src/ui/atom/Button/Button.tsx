@@ -1,10 +1,7 @@
 import React, { FC, useContext } from 'react'
 import { Pressable, StyleProp, StyleSheet } from 'react-native'
 import { IconKey, renderIcon } from '../../../assets/icons'
-import {
-  ITheme,
-  MsqThemeContext,
-} from '../../../contexts/MsqThemeContext/MsqThemeContext'
+import { ITheme, MsqThemeContext } from '../../../theme/MsqThemeContext'
 import Text from '../Text/Text'
 
 export type Variant =

@@ -37,7 +37,7 @@ const color = {
 
 export default color
 
-export type TColor = { [key in TPalette]: string }
+export type TColor = Record<TPalette, string>
 
 export type TPalette =
   | 'RED_50'

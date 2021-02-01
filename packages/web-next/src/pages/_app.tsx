@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Hydrate } from 'react-query/hydration'
@@ -11,7 +12,6 @@ import GlobalStyles from '../styles/GlobalStyles'
 import { routes } from '../utils'
 import 'react-placeholder/lib/reactPlaceholder.css'
 import './index.css'
-import Head from 'next/head'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,7 +41,7 @@ function App({ Component, pageProps }) {
           </main>
         </ThemeProvider>
       </Hydrate>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   )
 }
