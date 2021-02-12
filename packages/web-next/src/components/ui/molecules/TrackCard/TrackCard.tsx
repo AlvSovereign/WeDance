@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
+import xw from 'xwind'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTheme } from '@emotion/react'
@@ -42,21 +43,10 @@ const TrackCard: FC<TrackCardProps> = ({ onClickPlay, trackNo, track }) => {
   return (
     <Box
       align="center"
-      css={{
-        backgroundColor: DARKGREY_400,
-        borderColor: DARKGREY_400,
-        borderRadius: RADIUS_SM,
-        height: '50px',
-        justifyContent: 'flex-start',
-        marginBottom: LINEAR_XS,
-        paddingLeft: LINEAR_SM,
-        paddingRight: LINEAR_SM,
-        '&:hover': {
-          backgroundColor: DARKGREY_300,
-        },
-      }}
+      css={xw`bg-black rounded h-14 mb-2 px-3 hover:bg-gray-800 cursor-pointer transform-gpu active:scale-98`}
       direction="row"
       isReady={!!track}
+      justify="flex-start"
       loadingProps={{
         color: DARKGREY_100,
         style: { height: 50 },
@@ -66,102 +56,60 @@ const TrackCard: FC<TrackCardProps> = ({ onClickPlay, trackNo, track }) => {
       onMouseLeave={handleMouseLeave}
     >
       <Box align="center">
-        <Text
-          css={{ marginRight: LINEAR_MD }}
-          color="lightGrey"
-          variant="trackCardPlays"
-        >
+        <Text css={xw`mr-4`} color="gray" variant="trackCardPlays">
           {trackNo}
         </Text>
         <Button
-          css={{
-            borderWidth: 0,
-            height: '40px',
-            margin: 0,
-            position: 'relative',
-            padding: 0,
-            width: '40px',
-          }}
+          css={xw`h-10 m-0 relative p-0 w-10`}
           onClick={() => console.log('clicked')}
           variant="transparent"
         >
           {hovered ? (
             <PlayOutline
-              css={{ cursor: 'pointer', position: 'absolute', zIndex: 9 }}
-              fill={WHITE}
-              height="40px"
-              width="40px"
+              css={xw`cursor-pointer h-10 w-10 absolute z-10 fill-current text-white`}
             />
           ) : null}
-          <Image
-            css={{ borderRadius: RADIUS_SM }}
-            src={CoverImage}
-            height={40}
-            width={40}
-          />
+          <Image css={xw`rounded`} src={CoverImage} height={40} width={40} />
         </Button>
       </Box>
       <Box
         align="flex-start"
-        css={{ flex: 1, height: '40px', paddingLeft: LINEAR_MD }}
+        css={xw`flex-1 h-10 pl-4`}
         direction="column"
         justify="center"
       >
         <Button
-          css={{
-            justifyContent: 'flex-start',
-            marginBottom: LINEAR_XXS,
-            '&:hover': {
-              p: {
-                textDecoration: 'underline',
-              },
-            },
-          }}
+          css={xw`px-2 justify-start w-full active:scale-100`}
           onClick={onClickPlay}
           variant="link"
         >
           <Text
-            as="p"
             color="white"
-            css={{
-              whiteSpace: 'nowrap',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-            }}
+            component="p"
+            css={xw`truncate overflow-ellipsis whitespace-nowrap`}
             variant="trackCardTitle"
           >
             {title}
           </Text>
         </Button>
-        {/* map array of artists here */}
         <Link href="/">
           <Text
-            as="a"
-            color="lightGrey"
-            css={{
-              whiteSpace: 'nowrap',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
-              '&:hover': {
-                cursor: 'pointer',
-                textDecoration: 'underline',
-              },
-            }}
-            variant="trackCardTitle"
+            component="a"
+            color="gray"
+            css={xw`truncate overflow-ellipsis whitespace-nowrap`}
+            variant="body1"
           >
-            {'Artists array here'}
+            Artists array here
           </Text>
         </Link>
       </Box>
       <Box align="center">
-        <Text component="span" color="lightGrey" variant="trackCardPlays">
+        <Text component="span" color="gray" variant="trackCardPlays">
           {plays}
         </Text>
         <Button
-          css={{
-            marginLeft: LINEAR_XS,
-          }}
-          leftIcon={{ fill: WHITE, icon: 'more' }}
+          css={xw`ml-2 px-2`}
+          icon={{ textColor: 'white', iconKey: 'more', position: 'right' }}
           onClick={handleMoreClick}
           variant="transparent"
         />

@@ -1,13 +1,12 @@
-import React, { FC, ReactNode } from 'react'
-import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
-import { useTheme } from '@emotion/react'
-import { ITheme } from 'components/src/hooks/useAppTheme'
-import { clsx } from 'components/src/utils'
-import { TSpacing } from 'components/src/theme/spacing'
+import { FC, ReactNode } from 'react'
+import xw from 'xwind'
+import ReactPlaceholder, {
+  Props as RPProps,
+} from 'react-placeholder/lib/ReactPlaceholder'
 
-export type Colors = 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
+export type Colors = 'black' | 'blue' | 'gray' | 'red' | 'white'
 export type TGutterBottom = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-type Weights = 300 | 400 | 500 | 600
+type Weights = 'bold' | 'light' | 'medium' | 'normal' | 'semibold'
 
 interface TextProps {
   children: ReactNode
@@ -20,6 +19,7 @@ interface TextProps {
   variant: TextVariant
   weight?: Weights
 }
+
 export type TextVariant =
   | 'body1'
   | 'body2'
@@ -37,45 +37,6 @@ export type TextVariant =
   | 'trackCardPlays'
   | 'trackCardTitle'
 
-const colorStyles = (color: Colors, theme: ITheme) => {
-  const mapper = {
-    black: { color: theme.BLACK },
-    blue: { color: theme.BLUE_500 },
-    error: { color: theme.ERROR },
-    lightGrey: { color: theme.LIGHTGREY_500 },
-    white: { color: theme.WHITE },
-  }
-
-  return mapper[color]
-}
-
-const gutterBottomStyles = (
-  gutterBottom: TGutterBottom,
-  theme: Omit<TSpacing, 'RADIUS_SM' | 'RADIUS_MD' | 'RADIUS_LG'>,
-) => {
-  const {
-    LINEAR_XXS,
-    LINEAR_XS,
-    LINEAR_SM,
-    LINEAR_MD,
-    LINEAR_LG,
-    LINEAR_XL,
-    LINEAR_XXL,
-  } = theme
-
-  const mapper = {
-    xxs: { marginBottom: LINEAR_XXS },
-    xs: { marginBottom: LINEAR_XS },
-    sm: { marginBottom: LINEAR_SM },
-    md: { marginBottom: LINEAR_MD },
-    lg: { marginBottom: LINEAR_LG },
-    xl: { marginBottom: LINEAR_XL },
-    xxl: { marginBottom: LINEAR_XXL },
-  }
-
-  return mapper[gutterBottom]
-}
-
 const Text: FC<TextProps> = ({
   children,
   className,
@@ -86,42 +47,48 @@ const Text: FC<TextProps> = ({
   loadingProps,
   variant,
   weight,
-}) => {
-  const theme = useTheme() as ITheme
-  const {
-    LINEAR_XXS,
-    LINEAR_XS,
-    LINEAR_SM,
-    LINEAR_MD,
-    LINEAR_LG,
-    LINEAR_XL,
-    LINEAR_XXL,
-  } = theme as ITheme
-
-  return (
-    <ReactPlaceholder {...loadingProps} ready={isReady} showLoadingAnimation>
-      <Component
-        className={className}
-        css={clsx([
-          (variant || Component) && theme[variant || Component],
-          color && colorStyles(color, theme),
-          gutterBottom &&
-            gutterBottomStyles(gutterBottom!, {
-              LINEAR_XXS,
-              LINEAR_XS,
-              LINEAR_SM,
-              LINEAR_MD,
-              LINEAR_LG,
-              LINEAR_XL,
-              LINEAR_XXL,
-            }),
-          weight && { fontWeight: weight },
-        ])}
-      >
-        {children}
-      </Component>
-    </ReactPlaceholder>
-  )
-}
+}) => (
+  <ReactPlaceholder {...loadingProps} ready={isReady} showLoadingAnimation>
+    <Component
+      className={className}
+      css={[
+        xw`font-sans`,
+        variant === 'hero' &&
+          xw`leading-10 text-6xl md:text-7xl tracking-tight font-semibold`,
+        variant === 'h1' &&
+          xw`leading-10 text-5xl md:text-6xl tracking-tight font-semibold`,
+        variant === 'h2' &&
+          xw`leading-10 text-4xl md:text-5xl tracking-tight font-semibold`,
+        variant === 'h3' &&
+          xw`leading-10 text-2xl md:text-3xl tracking-tight font-semibold`,
+        variant === 'h4' &&
+          xw`leading-10 text-xl md:text-2xl tracking-tight font-semibold`,
+        variant === 'h5' &&
+          xw`leading-10 text-lg md:text-xl tracking-tight font-semibold`,
+        variant === 'body1' && xw`text-base md:text-lg font-normal`,
+        variant === 'button' && xw`font-button text-xs tracking-button`,
+        color === 'black' && xw`text-black`,
+        color === 'blue' && xw`text-blue-500`,
+        color === 'gray' && xw`text-gray-500`,
+        color === 'red' && xw`text-red-500`,
+        color === 'white' && xw`text-white`,
+        gutterBottom === 'xxs' && xw`mb-1`,
+        gutterBottom === 'xs' && xw`mb-2`,
+        gutterBottom === 'sm' && xw`mb-3`,
+        gutterBottom === 'md' && xw`mb-4`,
+        gutterBottom === 'lg' && xw`mb-5`,
+        gutterBottom === 'xl' && xw`mb-6`,
+        gutterBottom === 'xxl' && xw`mb-7`,
+        weight === 'light' && xw`font-light`,
+        weight === 'normal' && xw`font-normal`,
+        weight === 'medium' && xw`font-medium`,
+        weight === 'semibold' && xw`font-semibold`,
+        weight === 'bold' && xw`font-bold`,
+      ]}
+    >
+      {children}
+    </Component>
+  </ReactPlaceholder>
+)
 
 export default Text

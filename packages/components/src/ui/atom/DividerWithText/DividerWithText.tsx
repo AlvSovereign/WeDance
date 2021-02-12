@@ -14,7 +14,7 @@ const DividerWithText: FC<DividerWithTextProps> = ({ text }) => {
   return (
     <View style={styles.container}>
       <View style={styles.hr} />
-      <Text color="lightGrey" style={styles.text} variant="body1">
+      <Text color="gray" style={styles.text} variant="body1">
         {text}
       </Text>
       <View style={styles.hr} />

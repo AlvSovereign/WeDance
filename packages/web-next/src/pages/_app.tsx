@@ -1,4 +1,4 @@
-import React from 'react'
+import xw from 'xwind'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
@@ -7,11 +7,11 @@ import { persistWithLocalStorage } from 'react-query/persist-localstorage-experi
 import { useRouter } from 'next/router'
 import { ThemeProvider } from '@emotion/react'
 import { useAppTheme } from 'components/src/hooks'
-import { Navigation } from '../components'
+import { MsqPlayer, Navigation } from '@components/index'
 import GlobalStyles from '../styles/GlobalStyles'
 import { routes } from '../utils'
 import 'react-placeholder/lib/reactPlaceholder.css'
-import './index.css'
+import './base.css'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,16 +30,17 @@ function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <Head>
-            <title>wedance</title>
-          </Head>
-          <GlobalStyles />
-          <main css={{ display: 'flex', flexDirection: 'row' }}>
-            {router.pathname === routes.SIGNIN ? null : <Navigation />}
-            <Component {...pageProps} />
-          </main>
-        </ThemeProvider>
+        {/* <ThemeProvider theme={theme}> */}
+        <Head>
+          <title>wedance</title>
+        </Head>
+        <GlobalStyles />
+        <main css={xw`h-screen flex overflow-hidden bg-white`}>
+          {router.pathname === routes.SIGNIN ? null : <Navigation />}
+          <Component {...pageProps} />
+          <MsqPlayer />
+        </main>
+        {/* </ThemeProvider> */}
       </Hydrate>
       <ReactQueryDevtools />
     </QueryClientProvider>

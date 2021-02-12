@@ -7,10 +7,10 @@ import { dehydrate } from 'react-query/hydration'
 import { useTranslation } from 'react-i18next'
 import { useResponsive } from 'components/src/hooks'
 import { Artist, Release } from 'components/src/graphql/types'
-import { ArtistHero, Page } from '../../../components'
+import { GET_RELEASES_BY_ARTIST } from 'components/src/graphql/queries'
+import { ArtistHero, Page } from '@components/index'
 import { fetcher } from '../../../utils'
 import { useGetArtist } from '../../hooks'
-import { GET_RELEASES_BY_ARTIST } from 'components/src/graphql/queries'
 
 interface ArtistPageProps {
   initialArtistReleaseData: Release[]
@@ -30,7 +30,7 @@ const ArtistPage: FC<ArtistPageProps> = ({ initialArtistReleaseData }) => {
         } || wedance`}</title>
       </Head>
       <ArtistHero
-        data={data?.artist}
+        data={data?.artist as Artist}
         initialArtistReleaseData={initialArtistReleaseData}
         onFollowClick={() => {}}
         onPlayClick={() => {}}

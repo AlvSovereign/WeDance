@@ -15,6 +15,10 @@ const withTM = require('next-transpile-modules')(
 
 module.exports = withImages(
   withTM({
+    i18n: {
+      locales: ['en'],
+      defaultLocale: 'en',
+    },
     webpack(config) {
       config.resolve.alias = {
         ...(config.resolve.alias || {}),
@@ -26,6 +30,12 @@ module.exports = withImages(
         '.web.tsx',
         ...config.resolve.extensions,
       ]
+      config.module.rules.push({
+        test: /.mp3$/,
+        use: {
+          loader: 'url-loader',
+        },
+      })
       return config
     },
   }),

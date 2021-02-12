@@ -1,4 +1,4 @@
-import { FC, forwardRef, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { ITheme } from 'components/src/hooks/useAppTheme'
 import { Text } from '../../..'
@@ -31,7 +31,7 @@ const Input: FC<InputProps> = ({
       {label ? (
         <Text
           component="label"
-          color="lightGrey"
+          color="gray"
           htmlFor={name}
           variant="inputLabel"
         >

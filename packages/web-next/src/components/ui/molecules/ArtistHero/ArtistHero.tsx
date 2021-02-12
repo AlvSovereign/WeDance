@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+import xw from 'xwind'
 import Image from 'next/image'
 import { useTheme } from '@emotion/react'
 import { TFunction } from 'react-i18next'
@@ -15,12 +16,12 @@ import {
 } from '../../..'
 
 interface ArtistHeroProps {
-  data: Artist
+  data: Artist | undefined | null
   initialArtistReleaseData: Release[]
   onFollowClick: () => void
   onPlayClick: () => void
   onShareClick: () => void
-  t: TFunction
+  t: TFunction<string[]>
   windowSize: TBreakpoint
 }
 
@@ -59,27 +60,25 @@ const ArtistHero: FC<ArtistHeroProps> = ({
     >
       <div css={{ zIndex: -1 }}>
         <Image
-          alt="Image of DJ"
+          alt={`Cover image of ${data?.name}`}
           css={{ zIndex: -1 }}
-          objectFit="cover"
           layout="fill"
+          objectFit="cover"
+          priority
           src={ArtistHeroImage}
         />
       </div>
       <Box
-        css={{
-          marginBottom: LINEAR_XXL,
-          paddingLeft: LINEAR_XL,
-          paddingRight: LINEAR_LG,
-        }}
+        css={[
+          xw`mb-5 md:mb-6 px-5 md:px-6`,
+          windowSize === 'lg' ? xw`flex-1/2` : xw`flex-1`,
+        ]}
         direction="column"
-        flex={windowSize === 'lg' ? 0.5 : 1}
         justify="flex-end"
       >
         <Text
           component="h1"
           color="white"
-          gutterBottom="xxs"
           isReady={!!data?.name}
           loadingProps={{
             color: DARKGREY_100,
@@ -108,9 +107,9 @@ const ArtistHero: FC<ArtistHeroProps> = ({
           css={{ marginBottom: theme.LINEAR_XL }}
           countries={countries}
         /> */}
-        <Box css={{ marginBottom: LINEAR_XXL }} direction="row">
+        <Box css={xw`mb-8 md: mb-10`} direction="row">
           <Button
-            css={{ marginRight: LINEAR_SM, width: 200 }}
+            css={xw`mr-3 w-40`}
             isReady={!!data}
             loadingProps={{
               color: DARKGREY_100,
@@ -118,36 +117,20 @@ const ArtistHero: FC<ArtistHeroProps> = ({
               type: 'textRow',
             }}
             onClick={onPlayClick}
-            icon={{ fill: WHITE, icon: 'play', position: 'left' }}
+            icon={{ textColor: 'white', iconKey: 'play', position: 'right' }}
             text={t('play')}
             variant="primary"
           />
           <Button
-            css={{
-              backgroundColor: DARKGREY_400,
-              borderColor: DARKGREY_500,
-              marginRight: LINEAR_SM,
-              paddingLeft: LINEAR_SM,
-              paddingRight: LINEAR_SM,
-            }}
+            css={xw`w-auto`}
             onClick={onFollowClick}
             icon={{
-              fill: WHITE,
+              textColor: 'blue',
               position: 'right',
-              icon: 'personAdd',
+              iconKey: 'personAdd',
             }}
-            variant="plain"
-          />
-          <Button
-            css={{
-              backgroundColor: DARKGREY_400,
-              borderColor: DARKGREY_500,
-              paddingLeft: LINEAR_SM,
-              paddingRight: LINEAR_SM,
-            }}
-            onClick={onShareClick}
-            icon={{ fill: WHITE, position: 'right', icon: 'share' }}
-            variant="plain"
+            text={t('follow')}
+            variant="secondary"
           />
         </Box>
         <ArtistMostPopularSongs

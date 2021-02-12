@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useTranslation } from 'react-i18next'
-import { Page } from '../../components'
+import { Page } from '@components/index'
 
 interface MusicHomeProps {}
 

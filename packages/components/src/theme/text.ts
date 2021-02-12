@@ -124,7 +124,7 @@ const typography = {
   },
   button: {
     fontSize: 12,
-    fontFamily: 'Geomanist',
+    fontFamily: 'Montserrat',
     fontWeight: 700,
     letterSpacing: '2.5px',
     lineHeight: '12px',

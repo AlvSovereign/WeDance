@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery, useQueryClient } from 'react-query'
+import { UseQueryOptions, useQuery } from 'react-query'
 import { GET_ME } from 'components/src/graphql/queries'
 import { GetMeQuery } from 'components/src/graphql/types'
 import { fetcher } from '../../utils'

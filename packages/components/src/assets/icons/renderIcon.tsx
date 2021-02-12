@@ -1,4 +1,4 @@
-import React from 'react'
+import xw from 'xwind'
 import {
   BookmarkOutline,
   ChevronRight,
@@ -53,40 +53,47 @@ export type IconKey =
   | 'volumeUp'
 
 interface IRenderIcon {
-  fill: string
-  icon: IconKey
-  styles?: any
+  textColor: 'blue' | 'gray' | 'white'
+  iconKey: IconKey
+  className?: string[]
 }
 
-const renderIcon = ({ fill, icon, styles }: IRenderIcon) => {
+const renderIcon = ({ className, iconKey, textColor }: IRenderIcon) => {
+  const cssStyles = [
+    xw`fill-current`,
+    textColor === 'blue' && xw`text-blue-500`,
+    textColor === 'white' && xw`text-white`,
+    className,
+  ]
+
   const icons = {
-    bookmark: <BookmarkOutline fill={fill} style={styles} />,
-    chevronRight: <ChevronRight fill={fill} style={styles} />,
-    cross: <Clear fill={fill} style={styles} />,
-    facebook: <FBLogo fill={fill} style={styles} />,
-    google: <GLogo fill={fill} style={styles} />,
-    library: <Library fill={fill} style={styles} />,
-    more: <MoreHorizontal fill={fill} style={styles} />,
-    news: <Discovery fill={fill} style={styles} />,
-    personAdd: <PersonAdd fill={fill} style={styles} />,
-    playerPause: <PauseCircleOutline fill={fill} style={styles} />,
-    play: <PlayOutline fill={fill} style={styles} />,
-    playlistAdd: <PlaylistAdd fill={fill} style={styles} />,
-    playerPlay: <PlayCircleOutline fill={fill} style={styles} />,
-    repeat: <Repeat fill={fill} style={styles} />,
-    search: <Search fill={fill} style={styles} />,
-    settings: <Settings fill={fill} style={styles} />,
-    share: <ShareFilled fill={fill} style={styles} />,
-    shuffle: <Shuffle fill={fill} style={styles} />,
-    skipNext: <SkipNext fill={fill} style={styles} />,
-    skipPrevious: <SkipPrevious fill={fill} style={styles} />,
-    volumeDown: <VolumeDown fill={fill} style={styles} />,
-    volumeMute: <VolumeMute fill={fill} style={styles} />,
-    volumeOff: <VolumeOff fill={fill} style={styles} />,
-    volumeUp: <VolumeUp fill={fill} style={styles} />,
+    bookmark: <BookmarkOutline css={cssStyles} />,
+    chevronRight: <ChevronRight css={cssStyles} />,
+    cross: <Clear css={cssStyles} />,
+    facebook: <FBLogo css={cssStyles} />,
+    google: <GLogo css={cssStyles} />,
+    library: <Library css={cssStyles} />,
+    more: <MoreHorizontal css={cssStyles} />,
+    news: <Discovery css={cssStyles} />,
+    personAdd: <PersonAdd css={cssStyles} />,
+    playerPause: <PauseCircleOutline css={cssStyles} />,
+    play: <PlayOutline css={cssStyles} />,
+    playlistAdd: <PlaylistAdd css={cssStyles} />,
+    playerPlay: <PlayCircleOutline css={cssStyles} />,
+    repeat: <Repeat css={cssStyles} />,
+    search: <Search css={cssStyles} />,
+    settings: <Settings css={cssStyles} />,
+    share: <ShareFilled css={cssStyles} />,
+    shuffle: <Shuffle css={cssStyles} />,
+    skipNext: <SkipNext css={cssStyles} />,
+    skipPrevious: <SkipPrevious css={cssStyles} />,
+    volumeDown: <VolumeDown css={cssStyles} />,
+    volumeMute: <VolumeMute css={cssStyles} />,
+    volumeOff: <VolumeOff css={cssStyles} />,
+    volumeUp: <VolumeUp css={cssStyles} />,
   }
 
-  return icons[icon]
+  return icons[iconKey]
 }
 
 export default renderIcon

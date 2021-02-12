@@ -10,7 +10,7 @@ import { getTopPlays } from '../../../../utils'
 interface ArtistMostPopularSongsProps {
   initialData: Release[]
   releases: Release[]
-  t: TFunction
+  t: TFunction<string[]>
 }
 
 const ArtistMostPopularSongs: FC<ArtistMostPopularSongsProps> = ({

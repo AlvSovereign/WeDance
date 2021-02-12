@@ -30,7 +30,7 @@ interface TextProps extends AccessibilityProps {
   accessibilityRole?: any
   ariaLevel?: any
   children: ReactNode
-  color?: 'black' | 'blue' | 'error' | 'lightGrey' | 'white'
+  color?: 'black' | 'blue' | 'error' | 'gray' | 'white'
   display?: 'block' | 'inline'
   gutterBottom?: TGutterBottom
   style?: StyleProp<TextStyle>

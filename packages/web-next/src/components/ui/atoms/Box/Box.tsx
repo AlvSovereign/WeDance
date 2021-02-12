@@ -1,4 +1,5 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
+import xw from 'xwind'
 import ReactPlaceholder, { Props as RPProps } from 'react-placeholder'
 
 interface BoxProps {
@@ -7,7 +8,6 @@ interface BoxProps {
   children: ReactNode
   className?: string
   direction?: 'column' | 'row'
-  flex?: number
   isReady?: boolean
   justify?: 'flex-start' | 'flex-end' | 'center'
   loadingProps?: RPProps
@@ -21,7 +21,6 @@ const Box: FC<BoxProps> = ({
   className,
   component: Component = 'div' as any,
   direction,
-  flex,
   isReady = true,
   justify,
   loadingProps,
@@ -37,14 +36,19 @@ const Box: FC<BoxProps> = ({
     >
       <Component
         className={className}
-        css={{
-          alignItems: align,
-          display: 'flex',
-          flex,
-          flexDirection: direction,
-          justifyContent: justify,
-          position,
-        }}
+        css={[
+          xw`flex`,
+          align === 'center' && xw`items-center`,
+          align === 'flex-end' && xw`items-end`,
+          align === 'flex-start' && xw`items-start`,
+          direction === 'column' && xw`flex-col`,
+          direction === 'row' && xw`flex-row`,
+          justify === 'flex-end' && xw`justify-end`,
+          justify === 'flex-start' && xw`justify-start`,
+          position === 'absolute' && xw`absolute`,
+          position === 'fixed' && xw`fixed`,
+          position === 'relative' && xw`relative`,
+        ]}
         {...rest}
       >
         {children}

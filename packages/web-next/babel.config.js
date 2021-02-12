@@ -6,5 +6,5 @@ module.exports = {
     // '@babel/react',
     // '@babel/preset-typescript',
   ],
-  plugins: [['react-native-web', { commonjs: true }]],
+  plugins: [['react-native-web', { commonjs: true }], 'xwind/babel'],
 }

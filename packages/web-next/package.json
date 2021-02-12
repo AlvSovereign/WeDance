@@ -2,8 +2,9 @@
   "name": "web-next",
   "version": "0.0.1",
   "scripts": {
-    "dev": "next",
+    "dev": "yarn build:css && next",
     "build": "next build",
+    "build:css": "npx tailwindcss build src/styles/tailwind.base.css -o src/pages/base.css",
     "start": "next start",
     "test": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -16,12 +17,14 @@
     "@emotion/styled": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
+    "@types/howler": "^2.2.1",
     "apollo3-cache-persist": "^0.9.1",
     "components": "0.0.1",
     "deepmerge": "^4.2.2",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
     "graphql-tools": "^7.0.2",
+    "howler": "^2.2.1",
     "localforage": "^1.9.0",
     "next": "10.0.2",
     "next-images": "^1.7.0",
@@ -48,11 +51,17 @@
     "@types/react": "17.0.0",
     "@types/react-native": "0.63.36",
     "@types/react-test-renderer": "^17.0.0",
+    "autoprefixer": "^10.2.4",
     "babel-plugin-react-native-web": "0.14.8",
+    "file-loader": "^6.2.0",
     "next-page-tester": "^0.18.0",
+    "postcss": "^8.2.5",
     "react-test-renderer": "^17.0.1",
+    "tailwindcss": "^2.0.3",
     "ts-jest": "^26.4.4",
-    "typescript": "4.1.2"
+    "typescript": "4.1.2",
+    "url-loader": "^4.1.1",
+    "xwind": "^0.8.0"
   },
   "peerDependencies": {
     "react-native": "*"

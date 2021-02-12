@@ -1,23 +1,26 @@
-import React, { FC, ReactNode } from 'react'
-import styled from '@emotion/styled'
+import { FC, ReactNode } from 'react'
+import xw from 'xwind'
 import Image from 'next/image'
-import { ITheme } from 'components/src/hooks/useAppTheme'
 
 interface PageProps {
   backgroundImage?: string
   children: ReactNode
-  className: string
+  className?: string
 }
 
 const Page: FC<PageProps> = ({ backgroundImage, children, className }) => {
   return (
-    <div className={className}>
+    <div
+      css={xw`flex flex-col flex-1 h-screen w-full bg-white z-0`}
+      className={className}
+    >
       {backgroundImage ? (
-        <div className="img-container">
+        <div css={xw`-z-1`}>
           <Image
             alt="Background Image"
             objectFit="cover"
             layout="fill"
+            priority
             src={backgroundImage}
           />
         </div>
@@ -27,25 +30,4 @@ const Page: FC<PageProps> = ({ backgroundImage, children, className }) => {
   )
 }
 
-const StyledPage = styled((props: any) => <Page {...props} />)`
-  ${({
-    backgroundImage,
-    theme,
-  }: {
-    backgroundImage: string
-    theme: ITheme
-  }) => ({
-    backgroundColor: backgroundImage ? 'none' : theme.BACKGROUND,
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    minHeight: '100vh',
-    width: '100%',
-    zIndex: 0,
-    '.img-container': {
-      zIndex: backgroundImage ? -1 : 0,
-    },
-  })}
-`
-
-export default StyledPage
+export default Page

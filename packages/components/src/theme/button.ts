@@ -6,7 +6,7 @@ const { LINEAR_MD } = spacing
 
 const baseButton = {
   alignItems: 'center',
-  borderRadius: 4,
+  // borderRadius: 4,
   borderStyle: 'solid',
   borderWidth: 2,
   display: 'flex',
@@ -19,57 +19,57 @@ const baseButton = {
 }
 
 const partialStyles = {
-  facebook: {
-    backgroundColor: BLUE_FB,
-    borderColor: BLUE_FB,
-    span: {
-      color: WHITE,
-    },
-  },
-  google: {
-    backgroundColor: WHITE,
-    borderColor: WHITE,
-    span: {
-      color: BLACK,
-    },
-  },
-  link: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderWidth: 0,
-    height: 'auto',
-    padding: 0,
-    width: 'auto',
-    '& *': {
-      cursor: 'pointer',
-    },
-  },
-  plain: {
-    height: 'auto',
-    width: 'auto',
-  },
-  primary: {
-    backgroundColor: BLUE_500,
-    borderColor: BLUE_500,
-    span: {
-      color: WHITE,
-    },
-  },
-  secondary: {
-    backgroundColor: WHITE,
-    borderColor: BLUE_500,
-    span: {
-      color: BLUE_500,
-    },
-  },
-  transparent: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderWidth: 0,
-    height: 'auto',
-    padding: 0,
-    width: 'auto',
-  },
+  // facebook: {
+  //   backgroundColor: BLUE_FB,
+  //   borderColor: BLUE_FB,
+  //   span: {
+  //     color: WHITE,
+  //   },
+  // },
+  // google: {
+  //   backgroundColor: WHITE,
+  //   borderColor: WHITE,
+  //   span: {
+  //     color: BLACK,
+  //   },
+  // },
+  // link: {
+  //   backgroundColor: 'transparent',
+  //   borderColor: 'transparent',
+  //   borderWidth: 0,
+  //   height: 'auto',
+  //   padding: 0,
+  //   width: 'auto',
+  //   '& *': {
+  //     cursor: 'pointer',
+  //   },
+  // },
+  // plain: {
+  //   height: 'auto',
+  //   width: 'auto',
+  // },
+  // primary: {
+  //   backgroundColor: BLUE_500,
+  //   borderColor: BLUE_500,
+  //   span: {
+  //     color: WHITE,
+  //   },
+  // },
+  // secondary: {
+  //   backgroundColor: WHITE,
+  //   borderColor: BLUE_500,
+  //   span: {
+  //     color: BLUE_500,
+  //   },
+  // },
+  // transparent: {
+  //   backgroundColor: 'transparent',
+  //   borderColor: 'transparent',
+  //   borderWidth: 0,
+  //   height: 'auto',
+  //   padding: 0,
+  //   width: 'auto',
+  // },
 }
 
 const buttonStyles = { baseButton, ...partialStyles }

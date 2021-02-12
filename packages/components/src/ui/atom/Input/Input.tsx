@@ -80,7 +80,7 @@ const Input: FC<InputProps> = forwardRef(
         {label && (
           <Text
             as="label"
-            color="lightGrey"
+            color="gray"
             style={styles.label}
             variant="inputLabel"
           >

@@ -1,4 +1,17 @@
 {
+  "artist": {
+    "follow": "Follow",
+    "mostPopularSongs": "Most Popular Songs",
+    "play": "Play"
+  },
+  "common": {
+    "test": "testing"
+  },
+  "nav": {
+    "explore": "Explore",
+    "home": "Home",
+    "library": "Library"
+  },
   "signin": {
     "dividerText": "OR",
     "title": "Sign in",

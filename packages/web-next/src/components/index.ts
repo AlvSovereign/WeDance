@@ -5,7 +5,8 @@ import Button from './ui/atoms/Button/Button'
 import CountryFlags from './ui/atoms/CountryFlags/CountryFlags'
 import DividerWithText from './ui/atoms/DividerWithText/DividerWithText'
 import Input from './ui/atoms/Input/Input'
-import Navigation from './ui/molecules/Navigation/Navigation'
+import MsqPlayer from './ui/organism/MsqPlayer/MsqPlayer'
+import Navigation from './ui/organism/Navigation/Navigation'
 import Page from './ui/atoms/Page/Page'
 import Text from './ui/atoms/Text/Text'
 import TrackCard from './ui/molecules/TrackCard/TrackCard'
@@ -18,6 +19,7 @@ export {
   CountryFlags,
   DividerWithText,
   Input,
+  MsqPlayer,
   Navigation,
   Page,
   Text,
